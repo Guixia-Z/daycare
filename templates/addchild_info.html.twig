@@ -1,0 +1,31 @@
+{% extends "master.html.twig" %}
+
+{% block content %}
+
+{% if errorList %}
+    <ul>
+    {% for error in errorList %}
+        <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<h3>Child info:</h3>
+
+<form method="post">
+    First Name <input type="text" name="fname" value="{{v.fname}}"><br/>
+    Last Name <input type="text" name="lname" value="{{v.lname}}"><br/>
+    Gender  <select name="gender">
+            <option value="F">Female</option>
+            <option value="M">Male</option>
+            </select><br/>
+    Date of birth <input type="text" name="dob" placeholder="2019-08-31" value="{{v.dob}}"><br/>
+    Has siblings <select name="sibling">
+                <option value="Y">Yes</option>
+                <option value="N">No</option>
+                </select><br/>
+    <input type="submit" value="Apply a place">
+</form>
+
+
+{% endblock content %}

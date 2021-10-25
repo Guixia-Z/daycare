@@ -23,10 +23,10 @@ if (strpos($_SERVER['HTTP_HOST'], "fsd01.ca") !== false) {
     DB::$password = "ZF4OK9V2g6AO";
 }else{
     DB::$dbName = "day06slimauction";
-DB::$user = "day06slimauction";
-DB::$password = "OZQJdWnMdlLxhH()";
-DB::$host = "localhost";
-DB::$port = 3333;
+    DB::$user = "day06slimauction";
+    DB::$password = "OZQJdWnMdlLxhH()";
+    DB::$host = "localhost";
+    DB::$port = 3333;
 }
 
 

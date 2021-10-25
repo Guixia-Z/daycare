@@ -1,0 +1,28 @@
+{% extends "master.html.twig" %}
+
+{% block content %}
+
+{% if errorList %}
+    <ul>
+    {% for error in errorList %}
+        <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<h3>User info:</h3>
+
+<form method="post">
+    First Name <input type="text" name="fname" value="{{v.fname}}"><br/>
+    Last Name <input type="text" name="lname" value="{{v.lname}}"><br/>
+    Gender  <select name="gender">
+            <option value="F">Female</option>
+            <option value="M">Male</option>
+            </select><br/>
+    Phone Number <input type="text" name="phone" placeholder="888-888-8888" value="{{v.phone}}"><br/>
+    Address <input type="text" name="address" value="{{v.address}}"><br/>
+    <input type="submit" value="Submit">
+</form>
+
+
+{% endblock content %}
