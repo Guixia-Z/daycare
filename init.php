@@ -17,7 +17,7 @@ $log->pushProcessor(function ($record) {
     return $record;
 });
 
-if (strpos($_SERVER['HTTP_HOST'], "fds01.ca") !== false) {
+if (strpos($_SERVER['HTTP_HOST'], "fsd01.ca") !== false) {
     DB::$dbName = "cp5016_daycare";
     DB::$user = "cp5016_daycare";
     DB::$password = "ZF4OK9V2g6AO";
