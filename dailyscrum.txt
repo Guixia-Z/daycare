@@ -1,0 +1,6 @@
+2021/10/22 Everyone (The first Daily Scrum) 
+To do until next Scrum:
+- setup the initial project
+- create at least 10 user stories in Trello and start splitting them into TODO list
+- finish the poject description
+- setup the database
