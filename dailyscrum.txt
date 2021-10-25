@@ -20,3 +20,13 @@ To do until next Scrum:
 3. Need assistance / figure things out
 - need group discussion to decide database design
 - find out how to use charts in HTML5 
+
+2021/10/25  Guixia
+1. Done since last scrum
+- setup 3 tables in database, users, waitinglist, children
+- finish parent account register, add parent to users table and add their childern to waitinglist table
+2. Plan until next Scrum
+- user login
+- admin check user list
+3. Need assistance / figure things out
+- teacher's video for admin
