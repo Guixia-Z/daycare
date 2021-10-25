@@ -17,11 +17,29 @@ $log->pushProcessor(function ($record) {
     return $record;
 });
 
-DB::$dbName = "day06slimauction";
+if (strpos($_SERVER['HTTP_HOST'], "fds01.ca") !== false) {
+    DB::$dbName = "cp5016_daycare";
+    DB::$user = "cp5016_daycare";
+    DB::$password = "ZF4OK9V2g6AO";
+}else{
+    DB::$dbName = "day06slimauction";
 DB::$user = "day06slimauction";
 DB::$password = "OZQJdWnMdlLxhH()";
 DB::$host = "localhost";
 DB::$port = 3333;
+}
+
+
+
+
+/*DB::$dbName = "day06slimauction";
+DB::$user = "day06slimauction";
+DB::$password = "OZQJdWnMdlLxhH()";
+DB::$host = "localhost";
+DB::$port = 3333;*/
+
+//ZF4OK9V2g6AO
+//cp5016_daycare
 
 DB::$error_handler = 'db_error_handler'; // runs on mysql query errors
 DB::$nonsql_error_handler = 'db_error_handler'; // runs on library errors (bad syntax, etc)
