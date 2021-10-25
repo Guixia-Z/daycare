@@ -6,3 +6,17 @@ To do until next Scrum:
 - finish the poject description
 - setup the database
 
+2021/10/24 Yuan
+1. Done / not done since last scrum:
+- finished setup the initial project
+- created user stories in Trello and start splitting them into TODOs
+- reviewed PHP course videos
+- finished the poject proposal
+- did not setup the database
+2. To do until next Scrum:
+- finish the project description
+- watch PHP course videos
+- setup the database
+3. Need assistance / figure things out
+- need group discussion to decide database design
+- find out how to use charts in HTML5 
