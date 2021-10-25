@@ -30,3 +30,17 @@ To do until next Scrum:
 - admin check user list
 3. Need assistance / figure things out
 - teacher's video for admin
+2021/10/25  Guixia
+
+1. Done since last scrum
+-finished setup the initial project
+2.reviewed project proposal
+-make sure the project currect goal 
+-reviewed project basic code
+3. Need assistance / figure things out
+-  discussion to decide database  table 
+- need to review video for project
+
+
+
+
