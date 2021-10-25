@@ -30,8 +30,8 @@ To do until next Scrum:
 - admin check user list
 3. Need assistance / figure things out
 - teacher's video for admin
-2021/10/25  Guixia
 
+2021/10/25  Hong Lin
 1. Done since last scrum
 -finished setup the initial project
 2.reviewed project proposal
