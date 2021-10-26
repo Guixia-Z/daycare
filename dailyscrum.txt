@@ -63,3 +63,12 @@ To do until next Scrum:
 3. Need assistance / figure things out
 - host server not found, need teacher's help 
 
+2021/10/26  Hong Lin
+1. Done since last scrum
+-review the video for hosting 
+2.To do until next Scrum:
+-insert database by local DB
+-write some project code 
+3. Need assistance / figure things out
+-  find out the problme about local hosting problme
+- need continue to review video for project
