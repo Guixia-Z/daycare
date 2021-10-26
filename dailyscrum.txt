@@ -41,6 +41,16 @@ To do until next Scrum:
 -  discussion to decide database  table 
 - need to review video for project
 
-
+2021/10/25 Yuan
+1. Done since last scrum:
+- reviewed PHP course videos
+- finished the poject description
+- finished the database design
+2. To do until next Scrum:
+- watch PHP course videos
+- setup the database
+- insert records into childern table
+3. Need assistance / figure things out
+- need watch teacher's video for admin
 
 
