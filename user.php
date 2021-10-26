@@ -158,7 +158,6 @@ $app->post('/login', function ($request, $response, $args) use ($log) {
             return $this->view->render($response, '/admin/manager_board.html.twig');
         }
     }
-
 });   
 // $app->get('/register', function .....);
 
