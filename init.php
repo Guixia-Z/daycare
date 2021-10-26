@@ -22,24 +22,18 @@ if (strpos($_SERVER['HTTP_HOST'], "fsd01.ca") !== false) {
     DB::$user = "cp5016_daycare";
     DB::$password = "ZF4OK9V2g6AO";
 }else{
-    DB::$dbName = "day06slimauction";
-    DB::$user = "day06slimauction";
-    DB::$password = "OZQJdWnMdlLxhH()";
+    DB::$dbName = "privatedaycare";
+    DB::$user = "privatedaycare";
+    DB::$password = "mNV/6gkdLcd0JMh6";
     DB::$host = "localhost";
     DB::$port = 3333;
 }
 
-
-
-
-/*DB::$dbName = "day06slimauction";
-DB::$user = "day06slimauction";
-DB::$password = "OZQJdWnMdlLxhH()";
+/*DB::$dbName = "privatedaycare";
+DB::$user = "privatedaycare";
+DB::$password = "mNV/6gkdLcd0JMh6";
 DB::$host = "localhost";
 DB::$port = 3333;*/
-
-//ZF4OK9V2g6AO
-//cp5016_daycare
 
 DB::$error_handler = 'db_error_handler'; // runs on mysql query errors
 DB::$nonsql_error_handler = 'db_error_handler'; // runs on library errors (bad syntax, etc)

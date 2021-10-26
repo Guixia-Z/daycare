@@ -127,7 +127,39 @@ $app->post('/addchild_info/{id:[0-9]+}', function ($request, $response, $args) u
     }
 });
 
+$app->get('/login', function ($request, $response, $args) {
+    return $this->view->render($response, 'login.html.twig');
+});
 
+
+$app->post('/login', function ($request, $response, $args) use ($log) {
+    $email = $request->getParam('email');
+    $role = $request->getParam('role');
+    $password = $request->getParam('password');
+
+    $result = DB::queryFirstRow("SELECT * FROM users WHERE email=%s",$email);
+    if(!$result){
+        //return $response->write("user account not found");
+        throw new \Slim\Exception\NotFoundException($request, $response);
+    }
+    $loginSuccessful = ($result["role"] == $role) && ($result["password"] == $password);
+    if(!$loginSuccessful){
+        return $response->write("Invalid username or password");
+    }else{
+        unset($result["password"]);
+        $_SESSION["user"] = $result;
+        if($result["role"] == "parent"){
+            return $this->view->render($response, 'parent_board.html.twig');
+        }
+        if($result["role"] == "educator"){
+            return $this->view->render($response, 'educator_board.html.twig');
+        }
+        if($result["role"] == "admin"){
+            return $this->view->render($response, '/admin/manager_board.html.twig');
+        }
+    }
+
+});   
 // $app->get('/register', function .....);
 
 // $app->get('/login', function .....);

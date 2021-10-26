@@ -1,9 +1,9 @@
 vendor
 tmplcache
 logs
+
 .vscode
 sftp.json
-
 
 # Prerequisites
 *.d

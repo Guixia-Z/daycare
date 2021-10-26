@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script> tinymce.init({ selector: 'textarea[name=content]'  });  </script>
+        <link rel="stylesheet" href="/style.css"/>
+        <title>{% block title %}{% endblock %} - Admin interface</title>
+        {% block addHead %}
+        {% endblock %}
+    </head>
+    <body>
+        <div id="centeredContent">
+        <h1>Admin interface</h1>
+        {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
