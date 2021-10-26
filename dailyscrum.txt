@@ -6,7 +6,7 @@ To do until next Scrum:
 - finish the poject description
 - setup the database
 
-2021/10/24 Yuan
+2021/10/25 Yuan
 1. Done / not done since last scrum:
 - finished setup the initial project
 - created user stories in Trello and start splitting them into TODOs
@@ -41,7 +41,7 @@ To do until next Scrum:
 -  discussion to decide database  table 
 - need to review video for project
 
-2021/10/25 Yuan
+2021/10/26 Yuan
 1. Done since last scrum:
 - reviewed PHP course videos
 - finished the poject description
@@ -53,4 +53,13 @@ To do until next Scrum:
 3. Need assistance / figure things out
 - need watch teacher's video for admin
 
+2021/10/26 Guixia
+1. Done since last scrum:
+- finish login and admin list 
+- finish admin waitinglist view
+2. To do until next Scrum:
+- action in waitinglist table in admin account
+- watch teacher's video
+3. Need assistance / figure things out
+- host server not found, need teacher's help 
 
