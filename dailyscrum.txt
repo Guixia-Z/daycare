@@ -92,3 +92,13 @@ To do until next Scrum:
 - attendance table
 3. Need assistance / figure things out
 - watch teacher's videos
+
+2021/10/27 Hong Lin
+1. Done since last scrum:
+- create  educator basic board , basic cold child list.
+2. To do until next Scrum:
+- try to do functions of attendance 
+- continue to watch PHP course video
+- attendance table
+3. Need assistance / figure things out
+- discussion with group how to fix the time of attendance.
