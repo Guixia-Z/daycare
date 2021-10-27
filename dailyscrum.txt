@@ -82,3 +82,13 @@ To do until next Scrum:
 - try to create parent dashboard and functions
 3. Need assistance / figure things out
 - need watch teacher's videos
+
+2021/10/27 Guixia
+1. Done since last scrum:
+- finish delete action in waitinglist table in admin account
+- almost done home page
+2. To do until next Scrum:
+- add child from waitinglist to child table
+- attendance table
+3. Need assistance / figure things out
+- watch teacher's videos
