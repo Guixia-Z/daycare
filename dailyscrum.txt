@@ -72,3 +72,13 @@ To do until next Scrum:
 3. Need assistance / figure things out
 -  find out the problme about local hosting problme
 - need continue to review video for project
+
+2021/10/27 Yuan
+1. Done since last scrum:
+- created three tables: groups, childnots, and attendance and linked them to other tables
+- inserted mockup records into each table
+2. To do until next Scrum:
+- watch PHP course videos
+- try to create parent dashboard and functions
+3. Need assistance / figure things out
+- need watch teacher's videos
