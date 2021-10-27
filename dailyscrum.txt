@@ -99,6 +99,5 @@ To do until next Scrum:
 2. To do until next Scrum:
 - try to do functions of attendance 
 - continue to watch PHP course video
-- attendance table
 3. Need assistance / figure things out
 - discussion with group how to fix the time of attendance.
