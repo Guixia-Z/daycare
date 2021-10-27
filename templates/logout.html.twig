@@ -1,0 +1,18 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Logout{% endblock %}
+
+{% block addHead %}
+    <script>
+    setTimeout(() => {
+        window.location.href = "/";
+    }, 3000);
+    </script>
+{% endblock %}
+
+{% block content %}
+
+<p>Logout successful <a href="/">Click to home page</a></p>
+
+
+{% endblock content %}

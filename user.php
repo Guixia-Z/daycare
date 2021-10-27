@@ -4,6 +4,10 @@ require_once 'vendor/autoload.php';
 
 require_once 'init.php';
 
+$app->get('/', function ($request, $response, $args) {
+    return $this->view->render($response, 'index.html.twig');
+});
+
 $app->get('/createaccount', function ($request, $response, $args) {
     return $this->view->render($response, 'createaccount.html.twig');
 });
@@ -144,7 +148,7 @@ $app->post('/login', function ($request, $response, $args) use ($log) {
     }
     $loginSuccessful = ($result["role"] == $role) && ($result["password"] == $password);
     if(!$loginSuccessful){
-        return $response->write("Invalid username or password");
+        return $response->write("Invalid username or password <a href='/login'>Go back to login</a>");
     }else{
         unset($result["password"]);
         $_SESSION["user"] = $result;
@@ -158,7 +162,13 @@ $app->post('/login', function ($request, $response, $args) use ($log) {
             return $this->view->render($response, '/admin/manager_board.html.twig');
         }
     }
-});   
+});  
+
+$app->get('/logout', function ($request, $response, $args) {
+    unset($_SESSION["user"]);
+    return $this->view->render($response, 'logout.html.twig');
+});
+
 // $app->get('/register', function .....);
 
 // $app->get('/login', function .....);
