@@ -14,10 +14,10 @@
             <td>{{a.gender}}</td>
             <td>{{a.dateOfBirth}}</td>
             <td>{{a.hasSibling}}</td>
-            <td><form action="/admin/child/add/{{a.id}}">
+            <td><form method="post" action="/admin/waitinglist/add/{{a.id}}">
                     <input type="submit" value="ADD">
                 </form>
-                <form action="/admin/child/delete/{{a.id}}">
+                <form method="post" action="/admin/waitinglist/delete/{{a.id}}">
                     <input type="submit" value="Remove">
                 </form>
             </td>
