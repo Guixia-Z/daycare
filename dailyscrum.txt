@@ -121,3 +121,14 @@ To do until next Scrum:
 - children table edit and delete actions
 3. Need assistance / figure things out
 - understand API
+
+2021/10/28 Hong Lin
+1. Done since last scrum:
+- create childnotes table
+- update educator files 
+2. To do until next Scrum:
+- childern attendance post action
+- childern post action
+3. Need assistance / figure things out
+- review videos and continue to discuss problems.
+-fix some problme.
