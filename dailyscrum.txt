@@ -111,3 +111,13 @@ To do until next Scrum:
 - try to create parent dashboard and functions
 3. Need assistance / figure things out
 - need review teacher's videos
+
+2021/10/28 Guixia
+1. Done since last scrum:
+- finish add child from waitinglist to child table 
+- modify waitinglist delete function fixed some problems
+2. To do until next Scrum:
+- teachers attendance action
+- children table edit and delete actions
+3. Need assistance / figure things out
+- understand API
