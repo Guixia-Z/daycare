@@ -101,3 +101,13 @@ To do until next Scrum:
 - continue to watch PHP course video
 3. Need assistance / figure things out
 - discussion with group how to fix the time of attendance.
+
+2021/10/28 Yuan
+1. Done since last scrum:
+- modified attendance table 
+- inserted mockup records into each table
+2. To do until next Scrum:
+- watch PHP course videos
+- try to create parent dashboard and functions
+3. Need assistance / figure things out
+- need review teacher's videos
