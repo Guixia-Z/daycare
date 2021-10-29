@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h3>Child List:</h3>
+<h3>Group Child List:</h3>
 
     <table>
         <tr><th>First Name</th><th>Last Name</th><th>Gender</th><th>Date Of Birth</th><th>EmerContactName</th><th>EmergencyPhone</th></tr>
@@ -12,11 +12,9 @@
         <td>{{a.lastName}}</td>
         <td>{{a.gender}}</td>
         <td>{{a.dateOfBirth}}</td>
-        <td>{{a.emerContactName}}</td>
+        <td>{{a.emergencyContact}}</td>
         <td>{{a.emergencyPhone}}</td>
-        <td><form action="/addchild_info/{{a.id}}">
-                    <input type="submit" value="submit">
-                </td>
+        
         </tr>
         {% endfor %}
     </table>
