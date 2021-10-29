@@ -154,7 +154,7 @@ $app->post('/login', function ($request, $response, $args) use ($log) {
         $_SESSION["user"] = $result;
         if($result["role"] == "parent"){
             $id = DB::queryFirstField("SELECT id FROM users WHERE email=%s",$result["email"]);
-            return $this->view->render($response, 'parent_board.html.twig',["id" => $id]);
+            return $this->view->render($response, '/parent/parent_board.html.twig',["id" => $id]);
         }
         if($result["role"] == "educator"){
             return $this->view->render($response, 'educator_board.html.twig');

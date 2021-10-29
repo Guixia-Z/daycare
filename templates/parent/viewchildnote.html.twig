@@ -1,0 +1,24 @@
+{% extends "master.html.twig" %}
+
+{% block content %}
+
+<h3>Child Record:</h3>
+
+    <table>
+        <tr><th>First Name</th><th>Last Name</th><th>Gender</th><th>record date</th><th>weight</th><th>height</th><th>skills</th><th>note</th><th>photoFilePath</th></tr>
+        {% for a in list %}
+        <tr>
+            <td>{{a.firstName}}</td>
+            <td>{{a.lastName}}</td>
+            <td>{{a.gender}}</td>
+            <td>{{a.recordDate}}</td>
+            <td>{{a.weight}}</td>
+            <td>{{a.height}}</td>
+            <td>{{a.skills}}</td>
+            <td>{{a.note}}</td>
+            <td><img src="{{a.photoFilePath}}" width="150"></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock content %}
