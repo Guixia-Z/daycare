@@ -133,13 +133,4 @@ To do until next Scrum:
 - review videos and continue to discuss problems.
 -fix some problme.
 
-2021/10/29 Hong Lin
-1. Done since last scrum:
--  implemented class groupList
--  modified attenance table
-2. To do until next Scrum:
-- childern attendance time function
-- childernnotes function
-3. Need assistance / figure things out
-- review videos.
-- sovle problems.
+
