@@ -132,3 +132,13 @@ To do until next Scrum:
 3. Need assistance / figure things out
 - review videos and continue to discuss problems.
 -fix some problme.
+
+2021/10/29 Yuan
+1. Done since last scrum:
+- created three templates: parent_board, viewchildnote, and modifyparentinfo 
+2. To do until next Scrum:
+- watch PHP course videos
+- view child's note function
+3. Need assistance / figure things out
+- fix path problem
+- need review teacher's videos
