@@ -142,3 +142,14 @@ To do until next Scrum:
 3. Need assistance / figure things out
 - fix path problem
 - need review teacher's videos
+
+2021/10/29 Guixia
+1. Done since last scrum:
+- finish teachers attendance action
+- finish the view childrenlist in different class 
+2. To do until next Scrum:
+- add pagination in the children list
+- group list, children attendance in different class
+- add action in the childrenlist
+3. Need assistance / figure things out
+- API
