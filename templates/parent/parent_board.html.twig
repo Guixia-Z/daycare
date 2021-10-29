@@ -1,0 +1,17 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Parent Board{% endblock %}
+
+{% block content %}
+
+<h2>Parent Account</h2>
+
+<p><a href="/logout">Logout</a></p>
+
+<p><a href="/parent/viewchilnote">View child's note</a></p>
+
+<p><a href="/parent/modifyparentinfo">Modify parent's information</a></p>
+
+<p><a href="/addchild_info/{{id}}">Add a child</a></p>
+
+{% endblock %}
