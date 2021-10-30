@@ -164,3 +164,13 @@ To do until next Scrum:
 3. Need assistance / figure things out
 - review videos.
 - sovle problems.
+
+-2021/10/29 Hong Lin
+1. Done since last scrum:
+-  modified childnotes table
+2. To do until next Scrum:
+- childern attendance time function
+- childnotes list function
+3. Need assistance / figure things out
+- review videos.
+- sovle problems.
