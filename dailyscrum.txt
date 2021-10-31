@@ -165,7 +165,7 @@ To do until next Scrum:
 - review videos.
 - sovle problems.
 
--2021/10/29 Hong Lin
+-2021/10/30 Hong Lin
 1. Done since last scrum:
 -  modified childnotes table
 2. To do until next Scrum:
