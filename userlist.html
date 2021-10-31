@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ajaxError(function() {
+            alert("AJAX error");
+        });
+        $(document).ready(function() {
+            refreshUserList();
+        });
+
+        function refreshUserList() {
+            $.ajax({
+                url: '/admin/userlist',
+                type: 'GET',
+                dataType: 'json'
+            }).done(function (userList) {
+                var tbody = '<tr><th>#</th><th>Email</th><th>Role</th><th>Account Created Time</th><th>Name</th><th>Gender</th><th>Phone Number</th><th>Address</th></tr>';
+                for (var i = 0; i < userList.length; i++) {
+                    var user = userList[i];
+                    tbody += '<tr>';
+                    tbody += '<td>' + user.id + '</td>';
+                    tbody += '<td>' + user.email + '</td>';
+                    tbody += '<td>' + user.role + '</td>';
+                    tbody += '<td>' + user.createdTS + '</td>';
+                    tbody += '<td>' + user.firstName +" " + user.lastName + '</td>';
+                    tbody += '<td>' + user.gender + '</td>';
+                    tbody += '<td>' + user.phoneNumber + '</td>';
+                    tbody += '<td>' + user.address + '</td>';
+                    tbody += '<td><button id="edit">Edit</button><button id="delete">Remove</button></td>';
+                    tbody += '</tr>';
+                }
+                $("#listTable").html(tbody);
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="centerContent">
+        <div id="mainAppPane">
+            <div id="listPane">
+                <button id="showAddItem">Add User</button>
+                <table id="listTable"></table>
+            </div>
+            <div id="viewEditPane" style="display: none;">
+                Id: <span id="id"></span><br/>
+                Email: <span id="email"></span><br/>
+                Name: <span id="name"></span><br/>
+                Gender: <span id="gender"></span><br/>
+                Created Time: <span id="createdTS"></span><br/>
+                Phone Number: <input type="text" name="phone" placeholder="888-888-8888"><br/>
+                Address: <input type="text" name="address"><br/>
+                Role: <select name="role">
+                    <option value="parent">Parent</option>
+                    <option value="educator">Educator</option>
+                    <option value="admin">Manager</option>
+                    </select><br/>
+                <button id="save">Save</button>
+                <button id="cancel">Cancel</button>
+            </div>
+        </div>
+        <div id="waitForIt" style="z-index: 2; position: absolute; top: 20px; left: 200px; display: none;">
+            <img src="/swirl.gif" width="50">
+        </div>
+    </div>
+</body>
+
+</html>

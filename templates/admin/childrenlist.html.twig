@@ -1,0 +1,45 @@
+{% extends "admin/master.html.twig" %}
+
+{% block title %}Children List{% endblock %}
+
+{% block content %}
+
+{% for g in groupList %}
+<h3>Class Name: {{g.gname}}</h3>
+<h3>Educator: {{g.tfname}} {{g.tlname}}</h3>
+<table>
+    <tr><th>Child Name</th><th>gender</th><th>dateOfBirth</th><th>firstSchoolDay</th><th>Parent Name</th><th>Phone Number</th><th>Action</th></tr>
+    {% for a in list %}
+    {% if a.groupName == g.gname %}
+        <tr>
+            <td>{{a.cfname}} {{a.clname}}</td>
+            <td>{{a.gender}}</td>
+            <td>{{a.cdob}}</td>
+            <td>{{a.cfsd}}</td>
+            <td>{{a.pfname}} {{a.plname}}</td>
+            <td>{{a.phone}}</td>
+            <td><form method="post" action="/admin/waitinglist/add/{{a.id}}">
+                    <input type="submit" value="Edit">
+                </form>
+                <form method="post" action="/admin/waitinglist/delete/{{a.id}}">
+                    <input type="submit" value="Remove">
+                </form>
+            </td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+</table>
+{% endfor %}
+<div class="pageNavigation">
+{% if prevNo %}<a href="/admin/childrenlist/{{prevNo}}"><img src="/images/prev.png" width="30"/></a>{% endif %}
+{% for no in 1 .. 4 %}
+    {% if no == pageNo %}
+        {{no}}
+    {% else %}
+    <a href="/admin/childrenlist/{{no}}">{{no}}</a>
+    {% endif %}
+{% endfor %}
+{% if nextNo %}<a href="/admin/childrenlist/{{nextNo}}"><img src="/images/next.png" width="30"/></a>{% endif %}
+</div>
+
+{% endblock %}

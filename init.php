@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Montreal');
 session_start();
 
 require_once "vendor/autoload.php";
@@ -28,12 +29,6 @@ if (strpos($_SERVER['HTTP_HOST'], "fsd01.ca") !== false) {
     DB::$host = "localhost";
     DB::$port = 3333;
 }
-
-/*DB::$dbName = "privatedaycare";
-DB::$user = "privatedaycare";
-DB::$password = "mNV/6gkdLcd0JMh6";
-DB::$host = "localhost";
-DB::$port = 3333;*/
 
 DB::$error_handler = 'db_error_handler'; // runs on mysql query errors
 DB::$nonsql_error_handler = 'db_error_handler'; // runs on library errors (bad syntax, etc)
@@ -77,3 +72,11 @@ $container['view'] = function ($c) {
     $view->addExtension(new \Slim\Views\TwigExtension($router, $uri));
     return $view;
 };
+
+// set content-type globally using middleware (untested)
+/*$app->add(function($request, $response, $next) {
+    sleep(1); // artificially delay all responses by 1 second
+    $response = $next($request, $response);
+    // TODO: check if url begins with /api and only then set content type to json
+    return $response->withHeader('Content-Type', 'application/json');
+});*/

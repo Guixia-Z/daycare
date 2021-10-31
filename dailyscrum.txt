@@ -182,3 +182,12 @@ To do until next Scrum:
 - modify child information function
 3. Need assistance / figure things out
 - need watch teacher's reuse videos
+
+2021/10/31 Guixia
+1. Done since last scrum:
+- finish pagination in the children list
+- finish view of userlist
+2. To do until next scrum:
+- try to finish userlist action, childern list action
+3. Need assistance / figure things out
+- API

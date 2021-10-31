@@ -1,0 +1,23 @@
+{% extends "admin/master.html.twig" %}
+
+{% block title %}Educator List{% endblock %}
+
+{% block content %}
+
+<table>
+    <tr><th>First Name</th><th>Last Name</th><th>Check in</th><th>Check out</th><th>Absent</th></tr>
+    {% for a in list %}
+        <tr>
+            <td>{{a.firstName}}</td>
+            <td>{{a.lastName}}</td>
+            <td><form action="/admin/educator/checkin/{{a.id}}">
+            <input type="submit" name="checkin" value="checkin"></form></td>
+            <td><form action="/admin/educator/checkout/{{a.id}}">
+            <input type="submit" name="checkout" value="checkout"></form></td>
+            <td><form action="/admin/educator/absent/{{a.id}}">
+            <input type="submit" name="absent" value="absent"></form></td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
