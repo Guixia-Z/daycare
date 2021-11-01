@@ -209,3 +209,13 @@ To do until next Scrum:
 - continue watching teacher's reuse videos
 3. Need assistance / figure things out
 - need watch teacher's reuse videos
+
+021/11/01 Hong Lin
+1. Done since last scrum:
+- finished modify educator template and some functions
+2. To do until next scrum:
+- impliment modify educator information function (edit)
+- continue watching teacher's reuse videos
+3. Need assistance / figure things out
+- need watch teacher's reuse videos
+- need to sovle photo insert of childnote.
