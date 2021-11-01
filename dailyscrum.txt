@@ -192,11 +192,20 @@ To do until next Scrum:
 3. Need assistance / figure things out
 - API
 
-2021/10/30 Yuan
+2021/11/01 Yuan
 1. Done since last scrum:
 - finished modify child information template
 2. To do until next scrum:
 - impliment modify child information function (edit)
+- continue watching teacher's reuse videos
+3. Need assistance / figure things out
+- need watch teacher's reuse videos
+
+2021/11/01 Guixia
+1. Done since last scrum:
+- finished userlist action
+2. To do until next scrum:
+- children attendance
 - continue watching teacher's reuse videos
 3. Need assistance / figure things out
 - need watch teacher's reuse videos
