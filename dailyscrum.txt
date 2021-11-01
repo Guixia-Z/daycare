@@ -191,3 +191,12 @@ To do until next Scrum:
 - try to finish userlist action, childern list action
 3. Need assistance / figure things out
 - API
+
+2021/10/30 Yuan
+1. Done since last scrum:
+- finished modify child information template
+2. To do until next scrum:
+- impliment modify child information function (edit)
+- continue watching teacher's reuse videos
+3. Need assistance / figure things out
+- need watch teacher's reuse videos
