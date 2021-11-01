@@ -73,10 +73,3 @@ $container['view'] = function ($c) {
     return $view;
 };
 
-// set content-type globally using middleware (untested)
-/*$app->add(function($request, $response, $next) {
-    sleep(1); // artificially delay all responses by 1 second
-    $response = $next($request, $response);
-    // TODO: check if url begins with /api and only then set content type to json
-    return $response->withHeader('Content-Type', 'application/json');
-});*/

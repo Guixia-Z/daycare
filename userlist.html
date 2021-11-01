@@ -8,11 +8,53 @@
     <title>User List</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        var currId = 0;
         $(document).ajaxError(function() {
             alert("AJAX error");
         });
         $(document).ready(function() {
             refreshUserList();
+            $("#showEidtUser").click(function(){
+                $("#viewEditPane").show();
+            });
+            $("#cancel").click(function(){
+                $("#viewEditPane").hide();
+            });
+            $("#update").click(function(){
+                var phoneVal = $("input[name=phone]").val();
+                var addrVal = $("input[name=address]").val();
+                var roleVal = $("select[name=role]").val();
+                var userObj = {phoneNumber: phoneVal, address: addrVal, role: roleVal};
+                var josnString = JSON.stringify(userObj);
+
+                $.ajax({
+                    url: '/admin/userlist/' + currId,
+                    type: 'PATCH',
+                    data: josnString,
+                    dataType: 'json'
+                }).done(function (newId) {
+                    alert("Record with Id=" + currId + "updated");
+                    currId = 0;
+                    $("#viewEditPane").hide();
+                    refreshUserList();
+
+                });
+            });
+
+            $("#delete").click(function(){
+                if(currId == 0) return;
+                if(!confirm("Are you sure you want to delete this user?")) return;
+                $.ajax({
+                    url: '/admin/userlist/' + currId,
+                    type: 'DELETE',
+                    dataType: 'json'
+                }).done(function (result) {
+                    alert("deleted successfully" + result);
+                    refreshUserList();
+                    currId = 0;
+                    $("#viewEditPane").hide();
+                });
+            });
         });
 
         function refreshUserList() {
@@ -24,7 +66,7 @@
                 var tbody = '<tr><th>#</th><th>Email</th><th>Role</th><th>Account Created Time</th><th>Name</th><th>Gender</th><th>Phone Number</th><th>Address</th></tr>';
                 for (var i = 0; i < userList.length; i++) {
                     var user = userList[i];
-                    tbody += '<tr>';
+                    tbody += '<tr onclick="selectUser(' + user.id + ')">';
                     tbody += '<td>' + user.id + '</td>';
                     tbody += '<td>' + user.email + '</td>';
                     tbody += '<td>' + user.role + '</td>';
@@ -33,12 +75,31 @@
                     tbody += '<td>' + user.gender + '</td>';
                     tbody += '<td>' + user.phoneNumber + '</td>';
                     tbody += '<td>' + user.address + '</td>';
-                    tbody += '<td><button id="edit">Edit</button><button id="delete">Remove</button></td>';
                     tbody += '</tr>';
                 }
                 $("#listTable").html(tbody);
             });
         }
+
+        function selectUser(id){
+            $.ajax({
+                url: '/admin/userlist/' + id,
+                type: 'GET',
+                dataType: 'json'
+            }).done(function (user) {
+                currId = user.id;
+                $("#id").html(user.id);
+                $("#email").html(user.email);
+                $("#name").html(user.firstName + " " + user.lastName);
+                $("#gender").html(user.gender);
+                $("#createdTS").html(user.createdTS);
+                $("input[name=phone]").val(user.phoneNumber);
+                $("input[name=address]").val(user.address);
+                $("select[name=role]").val(user.role);
+                $("#viewEditPane").show();
+            });
+        }
+
     </script>
 </head>
 
@@ -46,7 +107,6 @@
     <div id="centerContent">
         <div id="mainAppPane">
             <div id="listPane">
-                <button id="showAddItem">Add User</button>
                 <table id="listTable"></table>
             </div>
             <div id="viewEditPane" style="display: none;">
@@ -62,12 +122,10 @@
                     <option value="educator">Educator</option>
                     <option value="admin">Manager</option>
                     </select><br/>
-                <button id="save">Save</button>
+                <button id="update">Update</button>
+                <button id="delete">Remove</button>
                 <button id="cancel">Cancel</button>
             </div>
-        </div>
-        <div id="waitForIt" style="z-index: 2; position: absolute; top: 20px; left: 200px; display: none;">
-            <img src="/swirl.gif" width="50">
         </div>
     </div>
 </body>

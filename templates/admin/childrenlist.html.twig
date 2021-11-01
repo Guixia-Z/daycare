@@ -18,9 +18,7 @@
             <td>{{a.cfsd}}</td>
             <td>{{a.pfname}} {{a.plname}}</td>
             <td>{{a.phone}}</td>
-            <td><form method="post" action="/admin/waitinglist/add/{{a.id}}">
-                    <input type="submit" value="Edit">
-                </form>
+            <td>
                 <form method="post" action="/admin/waitinglist/delete/{{a.id}}">
                     <input type="submit" value="Remove">
                 </form>

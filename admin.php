@@ -13,11 +13,6 @@ $app->get('/admin/waitinglist', function ($request, $response, $args) {
     return $this->view->render($response, '/admin/waitinglist.html.twig', ['list' => $waitingList]);
 });
 
-/*$app->get('/admin/waitinglist/{op:add|delete}[/{id:[0-9]+}]', function ($request, $response, $args) {
-    $waitingList = DB::query("SELECT * FROM waitinglist");
-    return $this->view->render($response, '/admin/waitinglist.html.twig', ['list' => $waitingList]);
-});*/
-
 $app->post('/admin/waitinglist/delete/{id:[0-9]+}', function ($request, $response, $args) {
     $child = DB::queryFirstRow("SELECT * FROM waitinglist WHERE id=%i", $args["id"]);
     if(!$child){
@@ -74,9 +69,20 @@ $app->post('/admin/educator/{op:checkin|checkout}/{id:[0-9]+}', function ($reque
 
 }); 
 
-$app->get('/admin/grouplist', function ($request, $response, $args) {
-    $groupList = DB::query("SELECT * FROM groups");
-    return $this->view->render($response, '/admin/waitinglist.html.twig', ['list' => $groupList]);
+$app->get('/admin/children/attendance', function ($request, $response, $args) {
+    return $this->view->render($response, '/admin/children_attendance.html.twig');
+});
+
+$app->get('/admin/children/attendance/{date}[/{pageNo:[0-9]+}]', function ($request, $response, $args) {
+    $pageNo = $args["pageNo"] ?? 1;
+    $date = $request->getParam('date');
+    $groupList = DB::query("SELECT g.id gid,g.groupName gname,u.firstName tfname,u.lastName tlname "
+        . "FROM groups g,users u WHERE u.id=g.educatorId LIMIT %i OFFSET %i",1,($pageNo -1));
+    $attendanceList = DB::query("SELECT c.firstName,c.lastName,a.day,a.startTS,a.endTS,a.`status`,a.note FROM children c,attendance a,groups g WHERE g.id=c.groupId AND a.childId=c.id AND g.day=%s",$date);
+    $prevNo = ($pageNo > 1) ? $pageNo-1 : "";
+    $nextNo = ($pageNo < 4) ? $pageNo+1 : "";
+    return $this->view->render($response, '/admin/attendancelist.html.twig', ['list' => $attendanceList, 
+        "groupList" => $groupList, "prevNo" => $prevNo, "nextNo" => $nextNo, "pageNo" => $pageNo]);
 });
 
 $app->get('/admin/childrenlist[/{pageNo:[0-9]+}]', function ($request, $response, $args) {
@@ -97,6 +103,16 @@ $app->get('/admin/childrenlist[/{pageNo:[0-9]+}]', function ($request, $response
 });
 
 $app->group('/admin', function (App $app) use ($log) {
+
+    $app->get('/attendance/{id:[0-9]+}', function (Request $request, Response $response, array $args) {
+        $id = $args["id"];
+        $date = $args["date"];
+        $list = DB::query("SELECT c.firstName,c.lastName,a.startTS,a.endTS,a.`status`,a.note, g.id FROM children c,attendance a,groups g WHERE g.id=c.groupId AND a.childId=c.id AND g.id=%i",$id);
+        $json = json_encode($list, JSON_PRETTY_PRINT);
+        $response->getBody()->write($json);
+        return $response;
+    });
+
     $app->get('/userlist', function (Request $request, Response $response, array $args) {
         $list = DB::query("SELECT id,email,`role`,createdTS,firstName,lastName,gender,phoneNumber,`address` FROM users");
         // print_r($list);
@@ -114,30 +130,13 @@ $app->group('/admin', function (App $app) use ($log) {
         return $response;
     });
 
-    $app->post('/userlist', function (Request $request, Response $response, array $args) use ($log) {
-        $json = $request->getBody();
-        $user = json_decode($json, TRUE); // true makes it return an associative array instead of an object
-        // validate
-        if ( ($result = validateTodo($user)) !== TRUE) {
-            $response = $response->withStatus(400);
-            $response->getBody()->write(json_encode("400 - " . $result));
-            return $response;
-        }
-        DB::insert('users', $user);
-        $insertId = DB::insertId();
-        $log->debug("Record todos added id=" . $insertId);
-        $response = $response->withStatus(201);
-        $response->getBody()->write(json_encode($insertId));
-        return $response; 
-    });
-
     $app->map(['PUT','PATCH'], '/userlist/{id:[0-9]+}', function (Request $request, Response $response, array $args) use ($log) {
         $id = $args['id'];
         $json = $request->getBody();
         $user = json_decode($json, TRUE); // true makes it return an associative array instead of an object
         // validate
         $method = $request->getMethod();
-        if ( ($result = validateTodo($user, $method == 'PATCH')) !== TRUE) {
+        if ( ($result = validateUser($user, $method == 'PATCH')) !== TRUE) {
             $response = $response->withStatus(400);
             $response->getBody()->write(json_encode("400 - " . $result));
             return $response;
@@ -151,17 +150,17 @@ $app->group('/admin', function (App $app) use ($log) {
         // unfortunately using affectedRows() won't work here b/c if data is the same as before
         // it returns 0 even if record exists and belongs to current user
         DB::update('users', $user, "id=%i", $args['id']);
-        $log->debug("Record todos updated, id=" . $id);
+        $log->debug("Record users updated, id=" . $id);
         $count = DB::affectedRows();
         $json = json_encode($count != 0, JSON_PRETTY_PRINT); // true or false
         return $response->getBody()->write($json);
     });
 
-    $app->delete('/users/{id:[0-9]+}', function (Request $request, Response $response, array $args) use ($log) {
+    $app->delete('/userlist/{id:[0-9]+}', function (Request $request, Response $response, array $args) use ($log) {
         $id = $args['id'];
         // FIXME: make sure body is empty
         DB::delete('users', "id=%i", $args['id']);
-        $log->debug("Record todos deleted id=" . $id);
+        $log->debug("Record users deleted id=" . $id);
         // code is always 200
         // return true if record actually deleted, false if it did not exist in the first place
         $count = DB::affectedRows();
@@ -170,7 +169,7 @@ $app->group('/admin', function (App $app) use ($log) {
     });
 });
 
-function validateTodo($user, $forPatch = false) {
+function validateUser($user, $forPatch = false) {
     if ($user === NULL) { // probably json_decode failed due to JSON syntax errors
         return "Invalid JSON data provided";
     }
@@ -179,7 +178,7 @@ function validateTodo($user, $forPatch = false) {
     $userFields = array_keys($user); // get names of fields as an array
     // check if there are any fields that should not be there
     if ($diff = array_diff($userFields, $expectedFields)) {
-        return "Invalid fields in Todo: [". implode(',', $diff). "]";
+        return "Invalid fields in User: [". implode(',', $diff). "]";
     }
     //
     if (!$forPatch) { // is it PUT or POST
@@ -219,4 +218,21 @@ function validateTodo($user, $forPatch = false) {
     // if we passed all tests return TRUE
     return TRUE;
 }
+
+function startWith($string, $startString){
+    $len = strlen($startString);
+    return(substr($string,0,$len) === $startString);
+}
+
+//middleware
+$app->add(function(Request $request, Response $response, callable $next){
+    $url = $request->getUri()->getPath();
+    if(startWith($url,"/admin")){
+        if(!isset($_SESSION["user"]) || $_SESSION["user"]["role"] !== "admin"){
+            $response = $response->withStatus(403);
+            return $this->view->render($response,"admin/error_access_denied.html.twig");
+        }
+    }
+    return $next($request,$response);
+});
 // $app->get('/admin/user/list', function .....);

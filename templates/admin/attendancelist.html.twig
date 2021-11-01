@@ -1,0 +1,21 @@
+{% extends "admin/master.html.twig" %}
+
+{% block title %}Children Attendance{% endblock %}
+
+{% block content %}
+
+<table>
+    <tr><th>Child Name</th><th>Start Time</th><th>End Time</th><th>Status</th><th>Note</th></tr>
+    {% for a in list %}
+        <tr>
+            <td>{{a.id}}</td>
+            <td>{{a.firstName}}</td>
+            <td>{{a.lastName}}</td>
+            <td>{{a.gender}}</td>
+            <td>{{a.dateOfBirth}}</td>
+            <td>{{a.hasSibling}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

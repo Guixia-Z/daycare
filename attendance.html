@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Children Attendance</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var currId = 0;
+        $(document).ajaxError(function() {
+            alert("AJAX error");
+        });
+        $(document).ready(function() {
+            $("#submit").click(function(){
+                attendanceList();
+            });
+        });
+
+        function attendanceList(){
+            $.ajax({
+                url: '/admin/attendance' + currId,
+                type: 'GET',
+                dataType: 'json'
+            }).done(function (attendanceList) {
+                var tbody = '<tr><th>Child Name</th><th>Start Time</th><th>End Time</th><th>Status</th><th>Note</th></tr>';
+                for (var i = 0; i < attendanceList.length; i++) {
+                    var child = attendanceList[i];
+                    tbody += '<tr>';
+                    tbody += '<td>' + child.firstName +" " + child.lastName + '</td>';
+                    tbody += '<td>' + child.startTS + '</td>';
+                    tbody += '<td>' + child.endTS + '</td>';
+                    tbody += '<td>' + child.status + '</td>';
+                    tbody += '<td>' + child.note + '</td>';
+                    tbody += '</tr>';
+                }
+                $("#listTable").html(tbody);
+            });
+        }
+
+        function selectGroup(id){
+            $.ajax({
+                url: '/admin/attendance/' + id,
+                type: 'GET',
+                dataType: 'json'
+            }).done(function (group) {
+                currId = group.id;
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <div id="mainAppPane">
+        <div id="choicePane">
+            Group Name: <select name="group">
+                <option value="1">Babies</option>
+                <option value="2">Toddlers</option>
+                <option value="3">Big kids</option>
+                <option value="4">Preschoolers</option>
+                </select><br/>
+            Date: <input type="date" name="date"><br>
+            <button id="submit">Submit</button>
+        </div>
+        <div id="listPane">
+            <table id="listTable"></table>
+        </div>
+    </div>
+</body>
+</html>
