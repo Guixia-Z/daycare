@@ -228,3 +228,11 @@ To do until next Scrum:
 - continue watching teacher's reuse videos
 3. Need assistance / figure things out
 - need watch teacher's reuse videos
+
+2021/11/02 Guixia
+1. Done since last scrum:
+- watch nodejs video do homework
+2. To do until next scrum:
+- childern attendance
+3. Need assistance / figure things out
+- need watch teacher's videos
