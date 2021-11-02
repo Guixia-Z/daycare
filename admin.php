@@ -119,6 +119,7 @@ $app->group('/admin', function (App $app) use ($log) {
         $json = json_encode($list, JSON_PRETTY_PRINT);
         $response->getBody()->write($json);
         return $response;
+        //return $this->view->render($response, '/admin/userlist.html.twig', ['list' => $list]);
     });
 
     $app->get('/userlist/{id:[0-9]+}', function (Request $request, Response $response, array $args) {
@@ -128,6 +129,7 @@ $app->group('/admin', function (App $app) use ($log) {
         $json = json_encode($user, JSON_PRETTY_PRINT);
         $response->getBody()->write($json);
         return $response;
+        //return $this->view->render($response, '/admin/userlist.html.twig');
     });
 
     $app->map(['PUT','PATCH'], '/userlist/{id:[0-9]+}', function (Request $request, Response $response, array $args) use ($log) {
