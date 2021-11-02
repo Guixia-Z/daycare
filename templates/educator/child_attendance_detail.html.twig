@@ -7,11 +7,11 @@ Date: {{today}}<br>
 <tr><th>Child Id</th> <th>First name</th> <th>Last Name</th> <th>Start Time</th> <th>End Time</th> <th>Staus</th><th>Note</th></tr><br>
     {% for a in list %}
     <tr> 
-    <td>{{a.id}}</td><br>
+   
         <td> {{a.firstName}}</td> 
         <td>{{a.lastName}}</td><br>
-        <td>{{a.startTS}} </td><br>
-        <td>{{a.endTS}} </td>  <br> 
+        <td>{{a.startTime}} </td><br>
+        <td>{{a.endTime}} </td>  <br> 
         <td>{{a.status}} </td><br>
         <td>{{a.note}} </td>   
         </tr>
