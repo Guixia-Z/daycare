@@ -236,3 +236,12 @@ To do until next Scrum:
 - childern attendance
 3. Need assistance / figure things out
 - need watch teacher's videos
+
+-2021/11/02 Hong Lin
+1. Done since last scrum:
+-  modified childnotes upload photo 
+2. To do until next Scrum:
+- child attenance check in and check out function.
+= watch video
+3. Need assistance / figure things out
+- fix photo validation and showing problem.
