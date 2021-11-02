@@ -4,7 +4,7 @@
 <h3>Attendance Form</h3>
 Date: {{today}}<br>
            <form  method = "post" >
-                  Child Id   <input type="text" name="id"  value="{{child.id}}"><br/>
+                  Child Id   <input type="text" hidden name="id"  value="{{child.id}}"><br/>
                   First Name: <input type="text" name="firstName" value="{{child.firstName}}"><br/>
                   Last Name: <input type="text" name="lastName" value="{{child.lastName}}"><br>
                  Start Time:<input type="time" name="startTS" min="00:00:00" max="23:59:59"><br>
