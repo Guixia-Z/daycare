@@ -4,16 +4,23 @@
 
 {% block content %}
 
+<h3>Date: {{list[0].date}}</h3>
+
 <table>
     <tr><th>Child Name</th><th>Start Time</th><th>End Time</th><th>Status</th><th>Note</th></tr>
     {% for a in list %}
         <tr>
-            <td>{{a.id}}</td>
-            <td>{{a.firstName}}</td>
-            <td>{{a.lastName}}</td>
-            <td>{{a.gender}}</td>
-            <td>{{a.dateOfBirth}}</td>
-            <td>{{a.hasSibling}}</td>
+            <td>{{a.firstName}} {{a.lastName}}</td>
+            <td>{{a.startTime}}</td>
+            <td>{{a.endTime}}</td>
+            <td>
+            {% if a.status == "present" %}
+                <img src="/images/daycare.png" width="30"/>
+            {% else %}
+                <img src="/images/absent.png" width="30"/>
+            {% endif %}
+            </td>
+            <td>{{a.note}}</td>
         </tr>
     {% endfor %}
 </table>

@@ -69,20 +69,18 @@ $app->post('/admin/educator/{op:checkin|checkout}/{id:[0-9]+}', function ($reque
 
 }); 
 
-$app->get('/admin/children/attendance', function ($request, $response, $args) {
+$app->get('/admin/attendance', function ($request, $response, $args) {
     return $this->view->render($response, '/admin/children_attendance.html.twig');
 });
 
-$app->get('/admin/children/attendance/{date}[/{pageNo:[0-9]+}]', function ($request, $response, $args) {
-    $pageNo = $args["pageNo"] ?? 1;
+$app->post('/admin/attendance', function ($request, $response, $args) use ($log){
+    $groupid = $request->getParam('group');
     $date = $request->getParam('date');
-    $groupList = DB::query("SELECT g.id gid,g.groupName gname,u.firstName tfname,u.lastName tlname "
-        . "FROM groups g,users u WHERE u.id=g.educatorId LIMIT %i OFFSET %i",1,($pageNo -1));
-    $attendanceList = DB::query("SELECT c.firstName,c.lastName,a.day,a.startTS,a.endTS,a.`status`,a.note FROM children c,attendance a,groups g WHERE g.id=c.groupId AND a.childId=c.id AND g.day=%s",$date);
-    $prevNo = ($pageNo > 1) ? $pageNo-1 : "";
-    $nextNo = ($pageNo < 4) ? $pageNo+1 : "";
-    return $this->view->render($response, '/admin/attendancelist.html.twig', ['list' => $attendanceList, 
-        "groupList" => $groupList, "prevNo" => $prevNo, "nextNo" => $nextNo, "pageNo" => $pageNo]);
+    $date = date("Y-m-d", strtotime($date));
+    $attendanceList = DB::query("SELECT c.firstName,c.lastName,a.date,a.startTime,a.endTime,a.`status`,a.note "
+                . "FROM children c,attendance a,groups g WHERE g.id=c.groupId AND a.childId=c.id AND a.date=%s AND g.id=%i",$date, $groupid);
+  
+    return $this->view->render($response, '/admin/attendancelist.html.twig', ['list' => $attendanceList]);
 });
 
 $app->get('/admin/childrenlist[/{pageNo:[0-9]+}]', function ($request, $response, $args) {
