@@ -219,3 +219,12 @@ To do until next Scrum:
 3. Need assistance / figure things out
 - need watch teacher's reuse videos
 - need to sovle photo insert of childnote.
+
+2021/11/02 Yuan
+1. Done since last scrum:
+- modified attendance table
+2. To do until next scrum:
+- impliment modify child information function (edit)
+- continue watching teacher's reuse videos
+3. Need assistance / figure things out
+- need watch teacher's reuse videos
