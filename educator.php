@@ -44,7 +44,7 @@ $app->get('/educator/child_attendance_detail', function ($request, $response, $a
 
 });
 
-
+/*
 $app->post('/educator/addchildnotes', function ($request, $response, $args) use ($log) {
     $id = $request->getParam('id');
     $firstName = $request->getParam('firstName');
@@ -76,3 +76,4 @@ $app->post('/educator/addchildnotes', function ($request, $response, $args) use 
     return $this->view->render($response, '/educator/notesave_success.html.twig');}
     
 });
+*/
