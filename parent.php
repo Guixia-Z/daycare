@@ -24,3 +24,16 @@ $app->get('/parent/viewchildnote', function ($request, $response, $args) {
     }
     return $this->view->render($response, '/parent/viewchildnote.html.twig', ['list' => $childNoteList]);
 });
+
+$app->get('/parent/viewwaitinglist', function ($request, $response, $args) {
+    $parentId = $_SESSION["user"]["id"];
+    $waitinglist = DB::query("SELECT firstName, lastName, gender, dateOfBirth, hasSibling FROM waitinglist WHERE parentId=%i", $parentId);
+    return $this->view->render($response, '/parent/viewwaitinglist.html.twig', ['list' => $waitinglist]);
+});
+
+$app->get('/parent/modifychildinfo', function ($request, $response, $args) use ($log){
+    $parentId = $_SESSION["user"]["id"];
+    $childrenlist = DB::query("SELECT firstName, lastName, gender, dateOfBirth, emergencyContact, emergencyPhone FROM children WHERE parentId=%i", $parentId);
+  
+    return $this->view->render($response, '/parent/modifychildinfo.html.twig', ['list' => $childrenlist]);
+});
