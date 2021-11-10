@@ -25,7 +25,7 @@ if (strpos($_SERVER['HTTP_HOST'], "fsd01.ca") !== false) {
 }else{
     DB::$dbName = "privatedaycare";
     DB::$user = "privatedaycare";
-    DB::$password = "mNV/6gkdLcd0JMh6";
+    DB::$password = "tg-CXj1S1E/fidlK";
     DB::$host = "localhost";
     DB::$port = 3333;
 }
