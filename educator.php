@@ -32,19 +32,21 @@ $app->get('/educator/childlist', function ($request, $response, $args) {
 
     $app->get('/educator/note_remove', function ($request, $response, $args) {
         $noteId = $request->getParam('noteId');
+        $childId = $request->getParam('childId');
+        $today = date("Y/m/d");
         DB::delete("childnotes", "id=%i", $noteId);
         $List = DB::query("SELECT * FROM childnotes");
         $educatorId = $_SESSION["user"]["id"];
-        $childList = DB::query("SELECT * FROM children WHERE educatorId=%d", $educatorId);
-        return $this->view->render($response, '/educator/childlist.html.twig',
-            ['list' => $childList]);
+        $noteList = DB::query("SELECT a.id, CONCAT(date(a.noteCreatedTS), (case time(a.noteCreatedTS) when '00:00:00' then '' else time(a.noteCreatedTS) end )) noteCreatedTS, a.weight, a.height, a.skills, a.note, a.photoFilePath, a.educatorId, a.childId, b.firstName,b.lastName FROM childnotes a,children b WHERE a.childId= b.id and a.educatorId =%d and a.childId=%d order by a.id desc" , $educatorId, $childId);
+        return $this->view->render($response, '/educator/noteHistory.html.twig',
+        ['list' => $noteList,'today' => $today, 'childId'=>$childId]);
         });
 
     $app->get('/educator/noteHistory', function ($request, $response, $args) {
         $childId = $request->getParam('id');
         $educatorId = $_SESSION["user"]["id"];
         $today = date("Y/m/d");
-        $noteList = DB::query("SELECT a.*, b.firstName,b.lastName FROM childnotes a,children b WHERE a.childId= b.id and a.educatorId =%d and a.childId=%d" , $educatorId, $childId);
+        $noteList = DB::query("SELECT a.id, CONCAT(date(a.noteCreatedTS), (case time(a.noteCreatedTS) when '00:00:00' then '' else time(a.noteCreatedTS) end )) noteCreatedTS, a.weight, a.height, a.skills, a.note, a.photoFilePath, a.educatorId, a.childId, b.firstName,b.lastName FROM childnotes a,children b WHERE a.childId= b.id and a.educatorId =%d and a.childId=%d order by a.id desc" , $educatorId, $childId);
         return $this->view->render($response, '/educator/noteHistory.html.twig',
         ['list' => $noteList,'today' => $today, 'childId'=>$childId]);
     });
@@ -70,7 +72,7 @@ $app->get('/educator/childlist', function ($request, $response, $args) {
 
 $app->get('/educator/childnotes_detail', function ($request, $response, $args) {
     $educatorId = $_SESSION["user"]["id"];
-    $noteList = DB::query("SELECT a.*, b.firstName,b.lastName FROM childnotes a,children b WHERE a.childId= b.id and a.educatorId =%d", $educatorId);
+    $noteList = DB::query("SELECT a.id, CONCAT(date(a.noteCreatedTS), (case time(a.noteCreatedTS) when '00:00:00' then '' else time(a.noteCreatedTS) end )) noteCreatedTS, a.weight, a.height, a.skills, a.note, a.photoFilePath, a.educatorId, a.childId, b.firstName,b.lastName FROM childnotes a,children b WHERE a.childId= b.id and a.educatorId =%d order by a.id desc ", $educatorId);
     return $this->view->render($response, '/educator/childnotes_detail.html.twig',
     ['list' => $noteList]);});
     
@@ -103,8 +105,7 @@ $app->post('/educator/child_attendance', function ($request, $response, $args) u
     $note = $request->getParam('note');
     $errorList = [];
     $today = date("Y-m-d");
-    //$attendanceList = DB::query("SELECT * FROM attendance WHERE childId =%d and date=%s", $childId,$today);
-    //if(count($attendanceList)==0){//no today's attendance, insert
+    
     if($status == "absent"){
         $valuesList = ["date" =>$date,"startTime" => "", "endTime" => "", "status" => "absent", "note" => $note, "childId"=>intval($childId)];
         DB::insert('attendance', $valuesList);
@@ -112,16 +113,7 @@ $app->post('/educator/child_attendance', function ($request, $response, $args) u
         $valuesList = ["date" =>$date,"startTime" => $startTS, "endTime" => $endTS, "status" => $status, "note" => $note, "childId"=>intval($childId)];
         DB::insert('attendance', $valuesList);
     }
-    /*}else{//update
-        if($status == "absent"){
-            $valuesList = ["date" =>$date,"startTime" => $today." 00:00:00", "endTime" => $today." 00:00:00", "status" => "absent", "note" => $note];
-            DB::update('attendance', $valuesList, 'childId=%d', intval($id));
-        }else{
-            $valuesList = ["date" =>$date,"startTime" => $today." ".$startTS, "endTime" => $today." ".$endTS, "status" => $status, "note" => $note];
-            DB::update('attendance', $valuesList, 'childId=%d', intval($id));
-        }
-    }
-    */
+    
     if ($errorList) { 
         return $this->view->render($response, '/educator/child_attendance', ['errorList' => $errorList, 'v' => $valuesList]);
     } else { 
