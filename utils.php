@@ -3,44 +3,99 @@ require_once 'vendor/autoload.php';
 require_once 'init.php';
 
 $app->post('/educator/addchildnotes', function ($request, $response, $args) use ($log) {
+    $childId = $request->getParam('childId');
+    $educatorId = $_SESSION["user"]["id"];
+    $height =$request->getParam('height');
+    $weight =$request->getParam('weight');
+    $skills = $request->getParam('skills');
+    $note = $request->getParam('note');
+    $today = date("Y/m/d");
+    $noteCreatedTs = $today;
+    $errorList = [];
+    
+    if (!is_numeric($weight)||$weight  < 0 ) {
+        $errorList[] = "weight can not be negative number";
+    }
+    if (!is_numeric($height)||$height  < 0 ) {
+        $errorList[] = "height can not be negative number";
+    }
+
+    // image validation
+    $uploadedImage = $request->getUploadedFiles()['image'];
+    if($_FILES['image']['name'] != "") {
+        $destImageFilePath = null;
+        $result = verifyUploadedPhoto($uploadedImage, $destImageFilePath);
+        if ($result !== TRUE) {
+            $errorList []= $result;
+        }
+    }
+    if ($errorList) { 
+        $child = $request->getParam('childId');
+        $child = DB::queryFirstRow("select a.* from children a where a.id=%d", $childId);
+        return $this->view->render($response, '/educator/addchildnotes.html.twig',
+         ['errorList' => $errorList, 'child' => $child]);
+    }
+    $valuesList = ["noteCreatedTS" => $noteCreatedTs, 
+        "weight" => floatval ($weight), 
+        "height" => floatval ($height), 
+        "skills" => $skills, 
+        "note"=>$note,
+        "educatorId" => intval($educatorId),
+        "childId" => intval($childId)];
+    if($_FILES['image']['name'] != "") {
+        $uploadedImage->moveTo($destImageFilePath); // FIXME: check if it failed !
+        $valuesList['photoFilePath'] = $destImageFilePath;
+    }
+    DB::insert('childnotes', $valuesList);
+    return $this->view->render($response, '/educator/notesave_success.html.twig');
+});
+
+
+$app->post('/educator/note_edit', function ($request, $response, $args) use ($log) {
     $id = $request->getParam('id');
-    $firstName = $request->getParam('firstName');
-    $lastName = $request->getParam('lastName');
-    $height =floatval ($request->getParam('height'));
-    $weight = floatval($request->getParam('weight'));
+    $height =$request->getParam('height');
+    $weight = $request->getParam('weight');
     $skills = ($request->getParam('skills'));
     $note = $request->getParam('note');
-   
+    $today = date("Y/m/d");
+    $noteCreatedTs = $today;
     $errorList = [];
-    if (strlen($note) < 2 || strlen($note) > 1000) {
-        $errorList[] = "note must be 2-1000 characters long";
-    }
+    
     if (!is_numeric($weight)||$weight  < 0 ) {
         $errorList[] = "height must be a number positive";
     }
     if (!is_numeric($height)||$height  < 0 ) {
         $errorList[] = "height must be a number positive";
     }
-// image validation
-$uploadedImage = $request->getUploadedFiles()['image'];
-$destImageFilePath = null;
-$result = verifyUploadedPhoto($uploadedImage, $destImageFilePath);
-if ($result !== TRUE) {
-    $errorList []= $result;
-}
-$valuesList = ['id' => $id,'height' => $height,'weight' => $weight,'skills' => $skills,'note' => $note];
+    // image validation
+    $uploadedImage = $request->getUploadedFiles()['image'];
+    if($_FILES['image']['name'] != "") {
+        $destImageFilePath = null;
+        $result = verifyUploadedPhoto($uploadedImage, $destImageFilePath);
+        if ($result !== TRUE) {
+            $errorList []= $result;
+        }
+    }
     if ($errorList) { 
-        return $this->view->render($response, '/educator/addchildnotes.html.twig',
-         ['errorList' => $errorList, 'v' => $valuesList]);
+        $noteId = $request->getParam('id');
+        $note = DB::queryFirstRow("select a.*,b.firstName,b.lastName,b.id childId  from childnotes a, children b where a.childId=b.id and a.id=%d", $noteId);
+        return $this->view->render($response, '/educator/note_edit.html.twig',
+         ['errorList' => $errorList, 'note' => $note]);
+    } 
 
-    } else { 
+    $valuesList = ['height' => $height,'weight' => $weight,
+    'skills' => $skills,'note' => $note,"noteCreatedTS" => $noteCreatedTs,];
+    
+    if($_FILES['image']['name'] != "") {
         $uploadedImage->moveTo($destImageFilePath); // FIXME: check if it failed !
         $valuesList['photoFilePath'] = $destImageFilePath;
-
-       DB::update('childnotes', $valuesList, 'childId=%i', $id);
-    return $this->view->render($response, '/educator/notesave_success.html.twig');}
-    
+    }
+    DB::update('childnotes', $valuesList, 'id=%d', intval($id));
+    return $this->view->render($response, '/educator/editsave_success.html.twig');
 });
+
+
+
 
 function verifyUploadedPhoto($photo, &$newFilePath) {
     if ($photo->getError() !== UPLOAD_ERR_OK) {
