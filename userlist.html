@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User List</title>
+    <link rel="shortcut icon" href="images/daycare.png"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans">
+    <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         var currId = 0;
@@ -72,7 +78,7 @@
                     tbody += '<td>' + user.role + '</td>';
                     tbody += '<td>' + user.createdTS + '</td>';
                     tbody += '<td>' + user.firstName +" " + user.lastName + '</td>';
-                    tbody += '<td>' + user.gender + '</td>';
+                    tbody += '<td>' + (user.gender == "F" ? '<img src="images/female.png" width="30px"/>' : '<img src="images/male.png" width="30px"/>') + '</td>';
                     tbody += '<td>' + user.phoneNumber + '</td>';
                     tbody += '<td>' + user.address + '</td>';
                     tbody += '</tr>';
@@ -127,6 +133,9 @@
                 <button id="cancel">Cancel</button>
             </div>
         </div>
+    </div>
+    <div>
+        <a href="/admin/">go back</a>
     </div>
 </body>
 

@@ -2,18 +2,47 @@
 
 {% block title %}Admin Board{% endblock %}
 
+ {% block addHead %}
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script>
+    $(document).ready(function() {
+        $("#userlist").click(function(){
+            window.location.href="/userlist.html";
+        });
+        $("#childrenlist").click(function(){
+            window.location.href="/admin/childrenlist";
+        });
+        $("#attendance").click(function(){
+            window.location.href="/admin/attendance";
+        });
+        $("#waitinglist").click(function(){
+            window.location.href="/admin/waitinglist";
+        });
+        $("#home").click(function(){
+            window.location.href="/";
+        });
+    });
+ </script>
+{% endblock %}
+
 {% block content %}
 
 <h2>Manager Account</h2>
 
-<p><a href="/logout">Logout</a></p>
+<div><a href="/logout">Logout</a></div>
 
-<p> <a href="userlist.html">User List</a>. </p>
+<div id="adminBoard">
 
-<p> <a href="/admin/childrenlist">Children List</a>. </p>
+<button class="button" id="userlist">User List</button>
 
-<p> <a href="/admin/children_attendance">Children Attendance</a>. </p>
+<button class="button" id="childrenlist">Children List</button>
 
-<p> <a href="/admin/waitinglist">Waitinglist Table</a>. </p>
+<button class="button" id="attendance">Children Attendance</button>
+
+<button class="button" id="waitinglist">Waitinglist</button>
+
+</div>
+
+<button class="button" id="home">Go Back</button>
 
 {% endblock %}

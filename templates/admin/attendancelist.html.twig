@@ -6,7 +6,7 @@
 
 <h3>Date: {{list[0].date}}</h3>
 
-<table>
+<table class="admintable">
     <tr><th>Child Name</th><th>Start Time</th><th>End Time</th><th>Status</th><th>Note</th></tr>
     {% for a in list %}
         <tr>
@@ -24,5 +24,7 @@
         </tr>
     {% endfor %}
 </table>
+
+<p> <a href="/admin/attendance">go back</a> </p>
 
 {% endblock %}

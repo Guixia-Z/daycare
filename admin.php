@@ -8,6 +8,10 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 
+$app->get('/admin[/]', function ($request, $response, $args) {
+    return $this->view->render($response, '/admin/manager_board.html.twig');
+});
+
 $app->get('/admin/waitinglist', function ($request, $response, $args) {
     $waitingList = DB::query("SELECT * FROM waitinglist");
     return $this->view->render($response, '/admin/waitinglist.html.twig', ['list' => $waitingList]);
@@ -31,11 +35,11 @@ $app->post('/admin/waitinglist/add/{id:[0-9]+}', function ($request, $response, 
     $level1 = "2017-09-30";
     $level2 = "2018-09-30";
     $level3 = "2019-09-30";
-    if(strtotime($child["dateOfBirth"] > strtotime($level3))){
+    if(strtotime($child["dateOfBirth"]) > strtotime($level3)){
         $groupid = 1;
-    }else if(strtotime($child["dateOfBirth"] > strtotime($level2))){
+    }else if(strtotime($child["dateOfBirth"]) > strtotime($level2)){
         $groupid = 2;
-    }else if(strtotime($child["dateOfBirth"] > strtotime($level1))){
+    }else if(strtotime($child["dateOfBirth"]) > strtotime($level1)){
         $groupid = 3;
     }else{
         $groupid = 4;
@@ -89,6 +93,29 @@ $app->get('/admin/childrenlist[/{pageNo:[0-9]+}]', function ($request, $response
     $groupList = DB::query("SELECT g.id gid,g.groupName gname,u.firstName tfname,u.lastName tlname "
         . "FROM groups g,users u WHERE u.id=g.educatorId LIMIT %i OFFSET %i",1,($pageNo -1));
 
+    $childrenList = DB::query("SELECT c.id,c.firstName cfname,c.lastName clname,c.gender gender, c.dateOfBirth cdob,"
+        ."c.firstSchoolDay cfsd, u.firstName pfname,u.lastName plname,u.phoneNumber phone,g.groupName "
+        ."FROM users u,groups g,children c WHERE c.parentId=u.id AND g.id=c.groupId");
+
+    //$childrenList = DB::query("SELECT u.firstName tname,g.groupName,c.firstName,c.lastName FROM users u,groups g,children c WHERE u.id=g.educatorId AND g.id=c.groupId");
+    $prevNo = ($pageNo > 1) ? $pageNo-1 : "";
+    $nextNo = ($pageNo < 4) ? $pageNo+1 : "";
+    return $this->view->render($response, '/admin/childrenlist.html.twig', ['list' => $childrenList, 
+        "groupList" => $groupList, "prevNo" => $prevNo, "nextNo" => $nextNo, "pageNo" => $pageNo]);
+});
+
+$app->post('/admin/childrenlist/delete/{id:[0-9]+}', function ($request, $response, $args) {
+    $child = DB::queryFirstRow("SELECT * FROM children WHERE id=%i", $args["id"]);
+    if(!$child){
+        throw new \Slim\Exception\NotFoundException($request, $response);
+    }
+    DB::delete("children", "id=%i", $args["id"]);
+
+    $pageNo = $args["pageNo"] ?? 1;
+
+    $groupList = DB::query("SELECT g.id gid,g.groupName gname,u.firstName tfname,u.lastName tlname "
+        . "FROM groups g,users u WHERE u.id=g.educatorId LIMIT %i OFFSET %i",1,($pageNo -1));
+
     $childrenList = DB::query("SELECT c.firstName cfname,c.lastName clname,c.gender gender, c.dateOfBirth cdob,"
         ."c.firstSchoolDay cfsd, u.firstName pfname,u.lastName plname,u.phoneNumber phone,g.groupName "
         ."FROM users u,groups g,children c WHERE c.parentId=u.id AND g.id=c.groupId");
@@ -101,15 +128,6 @@ $app->get('/admin/childrenlist[/{pageNo:[0-9]+}]', function ($request, $response
 });
 
 $app->group('/admin', function (App $app) use ($log) {
-
-    $app->get('/attendance/{id:[0-9]+}', function (Request $request, Response $response, array $args) {
-        $id = $args["id"];
-        $date = $args["date"];
-        $list = DB::query("SELECT c.firstName,c.lastName,a.startTS,a.endTS,a.`status`,a.note, g.id FROM children c,attendance a,groups g WHERE g.id=c.groupId AND a.childId=c.id AND g.id=%i",$id);
-        $json = json_encode($list, JSON_PRETTY_PRINT);
-        $response->getBody()->write($json);
-        return $response;
-    });
 
     $app->get('/userlist', function (Request $request, Response $response, array $args) {
         $list = DB::query("SELECT id,email,`role`,createdTS,firstName,lastName,gender,phoneNumber,`address` FROM users");

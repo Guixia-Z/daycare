@@ -7,19 +7,24 @@
 {% for g in groupList %}
 <h3>Class Name: {{g.gname}}</h3>
 <h3>Educator: {{g.tfname}} {{g.tlname}}</h3>
-<table>
+<table class="admintable">
     <tr><th>Child Name</th><th>gender</th><th>dateOfBirth</th><th>firstSchoolDay</th><th>Parent Name</th><th>Phone Number</th><th>Action</th></tr>
     {% for a in list %}
     {% if a.groupName == g.gname %}
         <tr>
             <td>{{a.cfname}} {{a.clname}}</td>
-            <td>{{a.gender}}</td>
+            <td>{% if a.gender == "F" %}
+  <img src="/images/female.png" width="30px"/>
+{% else %}
+   <img src="/images/male.png" width="30px"/>
+{% endif %}</td>
+            
             <td>{{a.cdob}}</td>
             <td>{{a.cfsd}}</td>
             <td>{{a.pfname}} {{a.plname}}</td>
             <td>{{a.phone}}</td>
             <td>
-                <form method="post" action="/admin/waitinglist/delete/{{a.id}}">
+                <form method="post" action="/admin/childrenlist/delete/{{a.id}}">
                     <input type="submit" value="Remove">
                 </form>
             </td>
@@ -39,5 +44,7 @@
 {% endfor %}
 {% if nextNo %}<a href="/admin/childrenlist/{{nextNo}}"><img src="/images/next.png" width="30"/></a>{% endif %}
 </div>
+
+<p> <a href="/admin/">go back</a> </p>
 
 {% endblock %}
