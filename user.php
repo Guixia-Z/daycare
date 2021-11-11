@@ -157,7 +157,7 @@ $app->post('/login', function ($request, $response, $args) use ($log) {
             return $this->view->render($response, '/parent/parent_board.html.twig',["id" => $id]);
         }
         if($result["role"] == "educator"){
-            return $this->view->render($response, 'educator_board.html.twig');
+            return $this->view->render($response, 'educator/educator_board.html.twig');
         }
         if($result["role"] == "admin"){
             return $this->view->render($response, '/admin/manager_board.html.twig');
