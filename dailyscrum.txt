@@ -264,3 +264,11 @@ To do until next Scrum:
 - watch video
 3. Need assistance / figure things out
 - fixed the css problems.
+
+-2021/11/11 Guixia
+1. Done since last scrum:
+-  all the backend functions in admin.
+2. To do until next Scrum:
+- front end,css
+3. Need assistance / figure things out
+- additional library.
