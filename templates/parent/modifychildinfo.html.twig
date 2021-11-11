@@ -1,28 +1,91 @@
 {% extends "master.html.twig" %}
 
+{% block title %}Children information:{% endblock %}
+
+{% block addHead %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var currId = 0;
+        $(document).ajaxError(function() {
+            alert("AJAX error");
+        });
+        $(document).ready(function() {
+            //refreshUserList();
+            $("#showEidtUser").click(function(){
+                $("#childrenInfoViewEditPane").show();
+            });
+            $("#cancel").click(function(){
+                $("#childrenInfoViewEditPane").hide();
+            });
+            $("#update").click(function(){
+                var emergencyContactVal = $("input[name=childrenInfoEmergencyContact]").val();
+                var emergencyPhoneVal = $("input[name=childrenInfoEmergencyPhone]").val();
+                var childObj = {emergencyContact: emergencyContactVal, emergencyPhone: emergencyPhoneVal};
+                var josnString = JSON.stringify(childObj);
+
+                $.ajax({
+                    url: '/parent/modifychildinfo/' + currId,
+                    type: 'PATCH',
+                    data: josnString,
+                    dataType: 'json'
+                }).done(function (newId) {
+                    alert("Record with Id=" + currId + "updated");
+                    currId = 0;
+                    $("#childrenInfoViewEditPane").hide();
+                    refreshUserList();
+
+                });
+            });
+
+        });
+
+        function selectChild(id){
+            $.ajax({
+                url: '/parent/modifychildinfo/' + id,
+                type: 'GET',
+                dataType: 'json'
+            }).done(function (child) {
+                $("#childrenInfoName").html(child.firstName + " " + child.lastName);
+                $("#childrenInfoGender").html(child.gender);
+                $("#childrenInfoDOB").html(child.dateOfBirth);
+                $("input[name=childrenInfoEmergencyContact]").val(child.emergencyContact);
+                $("input[name=childrenInfoEmergencyPhone]").val(child.emergencyPhone);
+                $("#childrenInfoViewEditPane").show();
+            });
+        }
+
+    </script>
+ {% endblock %}
+
 {% block content %}
 
-<h3>Children information:</h3>
+<div id="childrenInfoMainPane">
+    <div id="childrenInfoListPane">
+        <p><a href="/parent/parent_board">Go back to parent account page</a>. </p>
+        <table id="childrenInfoListTable">
+            <tr><th>First Name</th><th>Last Name</th><th>Gender</th><th>Date Of Birth</th><th>Emergency Contact</th><th>Emergency Phone</th></tr>
+            {% for a in list %}
+            <tr onclick="selectChild(' + {{a.id}} + ')">
+                <td>{{a.firstName}}</td>
+                <td>{{a.lastName}}</td>
+                <td>{{a.gender}}</td>
+                <td>{{a.dateOfBirth}}</td>
+                <td>{{a.emergencyContact}}</td>
+                <td>{{a.emergencyPhone}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 
-<table>
-    <tr><th>First Name</th><th>Last Name</th><th>Gender</th><th>Date Of Birth</th><th>Emergency Contact</th><th>Emergency Phone</th><th>Action</th></tr>
-    {% for a in list %}
-    <tr>
-        <td>{{a.firstName}}</td>
-        <td>{{a.lastName}}</td>
-        <td>{{a.gender}}</td>
-        <td>{{a.dateOfBirth}}</td>
-        <td>{{a.emergencyContact}}</td>
-        <td>{{a.emergencyPhone}}</td>
-        <td>
-            <form method="post" action="/parent/modifychildinfo/edit/{{a.id}}">
-                <input type="submit" value="Edit">
-            </form>        
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+    <div id="childrenInfoViewEditPane" style="display: none;">
+        Name: <span id="childrenInfoName">{{a.firstName}} {{a.lastName}}</span><br/>
+        Gender: <span id="childrenInfoGender">{{a.gender}}</span><br/>
+        Date Of Birth: <span id="childrenInfoDOB">{{a.dateOfBirth}}</span><br/>
+        Emergency Contact: <input type="text" name="childrenInfoEmergencyContact"><br/>
+        Emergency Phone: <input type="text" name="childrenInfoEmergencyPhone" placeholder="888-888-8888"><br/>
+        <button id="childrenInfoUpdate">Update</button>
+    </div>
 
-<p><a href="/parent/parent_board">Go back to parent account page</a>. </p>
+</div>
 
 {% endblock content %}

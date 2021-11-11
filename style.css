@@ -1,18 +1,37 @@
 body {
-    background-color: lightgray;
+    /* background-color: lightgray; */
     margin: 0;
     padding: 0;
 }
 
 #centeredContent {
     margin: 0 auto;
-    padding: 20px;
-    width: 1200px; /* 960px; */
-    background-color: white;
+    padding: 2rem;
+    height: auto;
+    width: 100%; 
+    /* background-color: white; */
 }
 
 .errorMessage {
     font-weight: bold;
     background-color: yellow;
     color: red;
+}
+
+body .headerColor {
+    background-color: #007cc3;
+}
+.headerLogo{
+    height: 5rem;
+}
+.headerText {
+    color: white;
+    text-align: center;
+    padding: 0.8rem;
+}
+body .headerColor a:link{
+    text-decoration: none;
+}
+.navDropdown{
+    background-color: white;
 }
