@@ -245,3 +245,22 @@ To do until next Scrum:
 = watch video
 3. Need assistance / figure things out
 - fix photo validation and showing problem.
+
+2021/11/11 Yuan
+1. Done since last scrum:
+- implimented modify child information function (edit)
+- added navigation bar and footer
+2. To do until next scrum:
+- add styles to html temlpate
+3. Need assistance / figure things out
+- need watch teacher's reuse videos
+
+-2021/11/11 Hong Lin
+1. Done since last scrum:
+-  almost done all the function of educator
+2. To do until next Scrum:
+- need to fix small bugs in attenance function
+- begin to design  the webface of frond_end.
+- watch video
+3. Need assistance / figure things out
+- fixed the css problems.
