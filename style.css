@@ -40,3 +40,126 @@ body .headerColor a:link{
 .navDropdown{
     background-color: white;
 }
+
+.rightImage{
+    text-align: right;
+    float:right;
+}
+
+.leftImage{
+    text-align: left;
+    float: left;
+}
+
+#adminBoard {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 50px 100px;
+  }
+  
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 32px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Mochiy Pop P One', sans-serif;
+    font-size: 32px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  
+  #userlist{
+    background-color: white; 
+    color: #6f17ad; 
+    border: 2px solid #d9b8f1;
+    box-shadow: 2px 2px 5px #d9b8f1;
+    border-radius: 8px;
+  }
+  
+  #userlist:hover {
+    background-color: #d9b8f1;
+    color: white;
+  }
+  
+  #childrenlist{
+    background-color: white; 
+    color: #29a199; 
+    border: 2px solid #b8f1ed;
+    box-shadow: 2px 2px 5px #b8f1ed;
+    border-radius: 8px;
+  }
+  
+  #childrenlist:hover {
+    background-color: #b8f1ed;
+    color: white;
+  }
+  
+  #attendance{
+    background-color: white; 
+    color: #ac29ac; 
+    border: 2px solid #f1b8f1;
+    box-shadow: 2px 2px 5px #f1b8f1;
+    border-radius: 8px;
+  }
+  
+  #attendance:hover {
+    background-color: #f1b8f1;
+    color: white;
+  }
+  
+  #waitinglist{
+    background-color: white; 
+    color: #2bac58; 
+    border: 2px solid #b8f1cc;
+    box-shadow: 2px 2px 5px #b8f1cc;
+    border-radius: 8px;
+  }
+  
+  #waitinglist:hover {
+    background-color: #b8f1cc;
+    color: white;
+  }
+  
+  #home {
+    background-color: white; 
+    color: #2bac58; 
+    border: 2px solid #b8f1cc;
+    box-shadow: 2px 2px 5px #b8f1cc;
+    padding: 8px 2px;
+    border-radius: 48px;
+    margin: 48px 2px;
+  }
+  
+  #listTable{
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+  }
+  
+  th {
+    height: 70px;
+    font-family: 'Mochiy Pop P One', sans-serif;
+  }
+  
+  td{
+    font-family: "Noto Sans", sans-serif;
+    font-size: 16px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #ddff95;
+  }
+  
+  .admintable{
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+  }
