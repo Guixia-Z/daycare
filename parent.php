@@ -31,20 +31,28 @@ $app->get('/parent/viewchildnote', function ($request, $response, $args) {
 
 $app->get('/parent/viewwaitinglist', function ($request, $response, $args) {
     $parentId = $_SESSION["user"]["id"];
-    $waitinglist = DB::query("SELECT firstName, lastName, gender, dateOfBirth, hasSibling FROM waitinglist WHERE parentId=%i", $parentId);
+    $waitinglist = DB::query("SELECT id, firstName, lastName, gender, dateOfBirth, hasSibling FROM waitinglist WHERE parentId=%i", $parentId);
     return $this->view->render($response, '/parent/viewwaitinglist.html.twig', ['list' => $waitinglist]);
 });
 
 $app->get('/parent/modifychildinfo', function ($request, $response, $args) use ($log){
     $parentId = $_SESSION["user"]["id"];
-    $childrenlist = DB::query("SELECT firstName, lastName, gender, dateOfBirth, emergencyContact, emergencyPhone FROM children WHERE parentId=%i", $parentId);
+    $childrenlist = DB::query("SELECT id, firstName, lastName, gender, dateOfBirth, emergencyContact, emergencyPhone FROM children WHERE parentId=%i", $parentId);
   
     return $this->view->render($response, '/parent/modifychildinfo.html.twig', ['list' => $childrenlist]);
 });
 
+$app->get('/parent/modifychildinfoJson', function ($request, $response, $args) use ($log){
+    $parentId = $_SESSION["user"]["id"];
+    $childrenlist = DB::query("SELECT id, firstName, lastName, gender, dateOfBirth, emergencyContact, emergencyPhone FROM children WHERE parentId=%i", $parentId);
+    $json = json_encode($childrenlist, JSON_PRETTY_PRINT);
+    $response->getBody()->write($json);
+    return $response;
+});
+
 $app->get('/parent/modifychildinfo/{id:[0-9]+}', function ($request, $response, $args) use ($log) {
     $id = $args['id'];
-    $child = DB::queryFirstRow("SELECT firstName, lastName, gender, dateOfBirth, emergencyContact, emergencyPhone FROM children WHERE id=%i", $id);
+    $child = DB::queryFirstRow("SELECT id, firstName, lastName, gender, dateOfBirth, emergencyContact, emergencyPhone FROM children WHERE id=%i", $id);
     $json = json_encode($child, JSON_PRETTY_PRINT);
     $response->getBody()->write($json);
     return $response;
@@ -81,16 +89,16 @@ function validateChildren($child, $forPatch = false) {
         return "Invalid JSON data provided";
     }
     // - only allow the fields that must/can be present
-    $expectedFields = ["id","email","role","createdTS","firstName","lastName","gender","phoneNumber","address"];
-    $userFields = array_keys($child); // get names of fields as an array
+    $expectedFields = ["id","firstName","lastName","gender","dateOfBirth","emergencyContact","emergencyPhone"];
+    $childFields = array_keys($child); // get names of fields as an array
     // check if there are any fields that should not be there
-    if ($diff = array_diff($userFields, $expectedFields)) {
+    if ($diff = array_diff($childFields, $expectedFields)) {
         return "Invalid fields in User: [". implode(',', $diff). "]";
     }
     //
     if (!$forPatch) { // is it PUT or POST
         // - check if any fields are missing that must be there
-        if ($diff = array_diff($expectedFields, $userFields)) {
+        if ($diff = array_diff($expectedFields, $childFields)) {
             return "Missing fields in Todo: [". implode(',', $diff). "]";
         }
     }
@@ -103,25 +111,21 @@ function validateChildren($child, $forPatch = false) {
             }
         }
     }
-    // - task 1-100 characters long
-    if (isset($child['email'])) {
-        $email = $child['email'];
-        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            return "Email must look like an email";
-        }
-    }
-    // - dueDate a valid date from 1900 to 2099 years
-    if (isset($child['phoneNumber'])) {
-        if (preg_match('/^([1-9]{3})(-)([0-9]{3})(-)([0-9]{4})$/', $child['phoneNumber']) !== 1) {
-            return "phone need to be 888-888-8888";
-        }
-    }
-    // - status must be pending or done
-    if (isset($child['address'])) {
-        if(strlen($child['address']) < 2){
+
+      // - status must be pending or done
+      if (isset($child['emergencyContact'])) {
+        if(strlen($child['emergencyContact']) < 2){
             return "Please check your address.";
         }
     }
+
+    // - dueDate a valid date from 1900 to 2099 years
+    if (isset($child['emergencyPhone'])) {
+        if (preg_match('/^([1-9]{3})(-)([0-9]{3})(-)([0-9]{4})$/', $child['emergencyPhone']) !== 1) {
+            return "phone need to be 888-888-8888";
+        }
+    }
+  
     // if we passed all tests return TRUE
     return TRUE;
 }

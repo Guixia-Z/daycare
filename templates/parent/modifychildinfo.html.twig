@@ -10,14 +10,13 @@
             alert("AJAX error");
         });
         $(document).ready(function() {
-            //refreshUserList();
             $("#showEidtUser").click(function(){
                 $("#childrenInfoViewEditPane").show();
             });
             $("#cancel").click(function(){
                 $("#childrenInfoViewEditPane").hide();
             });
-            $("#update").click(function(){
+            $("#childrenInfoUpdate").click(function(){
                 var emergencyContactVal = $("input[name=childrenInfoEmergencyContact]").val();
                 var emergencyPhoneVal = $("input[name=childrenInfoEmergencyPhone]").val();
                 var childObj = {emergencyContact: emergencyContactVal, emergencyPhone: emergencyPhoneVal};
@@ -32,19 +31,20 @@
                     alert("Record with Id=" + currId + "updated");
                     currId = 0;
                     $("#childrenInfoViewEditPane").hide();
-                    refreshUserList();
+                    refreshChildList();
 
                 });
             });
 
         });
-
+        
         function selectChild(id){
             $.ajax({
                 url: '/parent/modifychildinfo/' + id,
                 type: 'GET',
                 dataType: 'json'
             }).done(function (child) {
+                currId = child.id;
                 $("#childrenInfoName").html(child.firstName + " " + child.lastName);
                 $("#childrenInfoGender").html(child.gender);
                 $("#childrenInfoDOB").html(child.dateOfBirth);
@@ -52,6 +52,30 @@
                 $("input[name=childrenInfoEmergencyPhone]").val(child.emergencyPhone);
                 $("#childrenInfoViewEditPane").show();
             });
+        };
+
+        function refreshChildList() {
+            location.reload();
+            // $.ajax({
+            //     url: '/parent/modifychildinfo',
+            //     type: 'GET',
+            //     dataType: 'json'
+            // }).done(function (child) {
+            //     var tbody = '<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Date Of Birth</th><th>Emergency Contact</th><th>Emergency Phone</th></tr>';
+            //     for (var i = 0; i < childList.length; i++) {
+            //         var child = childList[i];
+            //         tbody += '<tr onclick="selectUser(' + child.id + ')">';
+            //         tbody += '<td>' + child.id + '</td>';
+            //         tbody += '<td>' + child.firstName + '</td>';
+            //         tbody += '<td>' + child.lastName + '</td>';
+            //         tbody += '<td>' + child.gender + '</td>';
+            //         tbody += '<td>' + child.dateOfBirth + '</td>';
+            //         tbody += '<td>' + child.emergencyContact + '</td>';
+            //         tbody += '<td>' + child.emergencyPhone + '</td>';
+            //         tbody += '</tr>';
+            //     }
+            //     $("#childrenInfoMainPane").html(tbody);
+            // });
         }
 
     </script>
@@ -63,9 +87,10 @@
     <div id="childrenInfoListPane">
         <p><a href="/parent/parent_board">Go back to parent account page</a>. </p>
         <table id="childrenInfoListTable">
-            <tr><th>First Name</th><th>Last Name</th><th>Gender</th><th>Date Of Birth</th><th>Emergency Contact</th><th>Emergency Phone</th></tr>
+            <tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Date Of Birth</th><th>Emergency Contact</th><th>Emergency Phone</th></tr>
             {% for a in list %}
-            <tr onclick="selectChild(' + {{a.id}} + ')">
+            <tr onclick="selectChild('{{a.id}}')">
+                <td>{{a.id}}</td>
                 <td>{{a.firstName}}</td>
                 <td>{{a.lastName}}</td>
                 <td>{{a.gender}}</td>
