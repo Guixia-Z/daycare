@@ -131,12 +131,18 @@ $app->group('/admin', function (App $app) use ($log) {
 
     $app->get('/userlist', function (Request $request, Response $response, array $args) {
         $list = DB::query("SELECT id,email,`role`,createdTS,firstName,lastName,gender,phoneNumber,`address` FROM users");
+        
+        return $this->view->render($response, '/admin/userlist.html.twig', ['list' => $list]);
+    });
+
+    $app->get('/userlistJson', function (Request $request, Response $response, array $args) {
+        $list = DB::query("SELECT id,email,`role`,createdTS,firstName,lastName,gender,phoneNumber,`address` FROM users");
         // print_r($list);
         $json = json_encode($list, JSON_PRETTY_PRINT);
         $response->getBody()->write($json);
         return $response;
-        //return $this->view->render($response, '/admin/userlist.html.twig', ['list' => $list]);
     });
+
 
     $app->get('/userlist/{id:[0-9]+}', function (Request $request, Response $response, array $args) {
         $id = $args['id'];
