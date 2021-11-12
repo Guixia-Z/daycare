@@ -255,7 +255,7 @@ body .headerColor a:link{
 }
 /***************  educator css *****************/
 
-#adminBoard1 {
+#educatorBoard{
   display: grid;
   grid-gap: 50px 100px;
   
@@ -359,14 +359,14 @@ body .headerColor a:link{
   font-size:15;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
-.submitList1{
+.submitNote{
   margin-left: 400px;
   border: none;
   background-color: lightskyblue;
   border-radius: 5px;
-  font-size:15;
+  font-size:20px;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  padding: 3px 8px;
+  width: 100px;
   margin-bottom: 20px;
 }
 .form{
