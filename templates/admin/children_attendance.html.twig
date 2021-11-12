@@ -6,14 +6,24 @@
 
 <h3>Children Attendance</h3>
 
-<form method="post" >
-    Group Name: <select name="group">
+<form class="infoform" method="post" >
+    <div class="col-25">
+    Group Name:
+    </div>
+    <div class="col-75">
+     <select name="group">
             <option value="1">Babies</option>
             <option value="2">Toddlers</option>
             <option value="3">Big kids</option>
             <option value="4">Preschoolers</option>
             </select><br/>
-    Date: <input type="date" name="date"><br/>
+    </div>
+    <div class="col-25">
+    Date: 
+    </div>
+    <div class="col-75">
+    <input type="date" name="date"><br/>
+    </div>
     <input type="submit" value="Submit">
 </form>
 

@@ -24,7 +24,7 @@
             <td>{{a.pfname}} {{a.plname}}</td>
             <td>{{a.phone}}</td>
             <td>
-                <form method="post" action="/admin/childrenlist/delete/{{a.id}}">
+                <form id="subbutton" method="post" action="/admin/childrenlist/delete/{{a.id}}">
                     <input type="submit" value="Remove">
                 </form>
             </td>
@@ -39,7 +39,7 @@
     {% if no == pageNo %}
         {{no}}
     {% else %}
-    <a href="/admin/childrenlist/{{no}}">{{no}}</a>
+    <a id="index" href="/admin/childrenlist/{{no}}">{{no}}</a>
     {% endif %}
 {% endfor %}
 {% if nextNo %}<a href="/admin/childrenlist/{{nextNo}}"><img src="/images/next.png" width="30"/></a>{% endif %}

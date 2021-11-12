@@ -1,23 +1,40 @@
 {% extends "master.html.twig" %}
 
+{% block title %}Login{% endblock %}
+
 {% block content %}
 
 {% if errorList %}
-    <ul>
+    <ul class="errorlist">
     {% for error in errorList %}
         <li>{{ error }}</li>
     {% endfor %}
     </ul>
 {% endif %}
 
-<form method="post">
-    Email <input type="email" name="email" value="{{v.email}}"><br/>
-    Role <select name="role">
+<form class="infoform" method="post">
+    <div class="col-25">
+    Email
+    </div>
+    <div class="col-75">
+     <input type="email" name="email" value="{{v.email}}"><br/>
+     </div>
+    <div class="col-25">
+    Role
+    </div>
+    <div class="col-75">
+     <select name="role">
             <option value="parent">Parent</option>
             <option value="educator">Educator</option>
             <option value="admin">Manager</option>
             </select><br/>
-    Password <input type="password" name="password"><br/>
+    </div>
+    <div class="col-25">
+    Password
+    </div> 
+    <div class="col-75">
+    <input type="password" name="password"><br/>
+    </div>
     <input type="submit" value="Login">
 </form>
 

@@ -49,8 +49,8 @@ $app->post('/admin/waitinglist/add/{id:[0-9]+}', function ($request, $response, 
     DB::insert("children", ["firstName" => $child["firstName"], "lastName" => $child["lastName"], 
             "gender" => $child["gender"], "dateOfBirth" => $child["dateOfBirth"], "firstSchoolDay" => date("Y-m-d"),"parentId" => $child["parentId"], "educatorId" => $teacherid, "groupId" => $groupid]);
     DB::delete("waitinglist", "id=%i", $args["id"]);
-    //$waitingList = DB::query("SELECT * FROM waitinglist");
-    return $this->view->render($response, '/admin/waitinglist.html.twig');
+    $waitingList = DB::query("SELECT * FROM waitinglist");
+    return $this->view->render($response, '/admin/waitinglist.html.twig',['list' => $waitingList]);
 });
 
 $app->get('/admin/educatorlist', function ($request, $response, $args) {
@@ -253,4 +253,24 @@ $app->add(function(Request $request, Response $response, callable $next){
     }
     return $next($request,$response);
 });
+
+$app->get('/admin/groupchart', function ($request, $response, $args) {
+    $numberlist = DB::query("SELECT COUNT(*) FROM `children` GROUP BY groupId");
+    $array = objarray_to_array($numberlist);
+    //print_r($numberlist);
+    return $this->view->render($response, '/admin/groupchart.html.twig',['list' => $array]);
+});
+
+function objarray_to_array($obj) {
+    $ret = array();
+    foreach ($obj as $key => $value) {
+    if (gettype($value) == "array" || gettype($value) == "object"){
+            $ret[$key] =  objarray_to_array($value);
+    }else{
+        $ret[$key] = $value;
+    }
+    }
+    return $ret;
+}  
+
 // $app->get('/admin/user/list', function .....);

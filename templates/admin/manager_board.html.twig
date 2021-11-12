@@ -18,8 +18,8 @@
         $("#waitinglist").click(function(){
             window.location.href="/admin/waitinglist";
         });
-        $("#home").click(function(){
-            window.location.href="/";
+        $("#groupchart").click(function(){
+            window.location.href="/admin/groupchart";
         });
     });
  </script>
@@ -27,9 +27,7 @@
 
 {% block content %}
 
-<h2>Manager Account</h2>
-
-<div><a href="/logout">Logout</a></div>
+<h2>Manager Account</h2><br/><br/>
 
 <div id="adminBoard">
 
@@ -41,8 +39,8 @@
 
 <button class="button" id="waitinglist">Waitinglist</button>
 
-</div>
+<button class="button" id="groupchart">Group Chart</button>
 
-<button class="button" id="home">Go Back</button>
+</div>
 
 {% endblock %}

@@ -141,6 +141,18 @@ $app->post('/login', function ($request, $response, $args) use ($log) {
     $role = $request->getParam('role');
     $password = $request->getParam('password');
 
+    $errorList = [];
+    if (strlen($email) == 0) {
+        $errorList []= "Please check your email";
+    }
+    if (strlen($password) == 0) {
+        $errorList []= "Please enter your password";
+    }
+
+    if ($errorList) { // STATE 2: errors
+        return $this->view->render($response, 'login.html.twig',['errorList' => $errorList]);
+    }
+
     $result = DB::queryFirstRow("SELECT * FROM users WHERE email=%s",$email);
     if(!$result){
         //return $response->write("user account not found");
