@@ -24,10 +24,8 @@ body {
     text-indent: 2em;
 }
 
-.errorMessage {
-    font-weight: bold;
-    background-color: yellow;
-    color: red;
+.headerColor{
+  position: sticky;
 }
 
 body .headerColor {
