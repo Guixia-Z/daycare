@@ -1,4 +1,4 @@
-{% extends "master.html.twig" %}
+{% extends "parent/master.html.twig" %}
 
 {% block title %}Add Child{% endblock %}
 
@@ -12,6 +12,7 @@
     </ul>
 {% endif %}
 
+<div class="addChildInfoPage">
 <h3>Child info:</h3>
 
 <form class="infoform" method="post">
@@ -53,6 +54,6 @@
     </div>
     <input type="submit" value="Apply a place">
 </form>
-
+</div>
 
 {% endblock content %}

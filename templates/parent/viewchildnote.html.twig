@@ -1,10 +1,10 @@
-{% extends "master.html.twig" %}
+{% extends "parent/master.html.twig" %}
 
 {% block content %}
 
 <h3>Child Record:</h3>
 
-<table>
+<table class="table table-hover table-info">
     <tr><th>First Name</th><th>Last Name</th><th>Gender</th><th>Group</th><th>record date</th><th>record by</th><th>weight (kg)</th><th>height (cm)</th><th>skills</th><th>note</th><th>photoFilePath</th></tr>
     {% for a in list %}
     <tr>
@@ -23,6 +23,6 @@
     {% endfor %}
 </table>
 
-<p><a href="/parent/parent_board">Go back to parent account page</a>. </p>
+<p><a href="/parent/parent_board">Go back</a></p>
 
 {% endblock content %}

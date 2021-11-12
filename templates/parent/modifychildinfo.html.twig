@@ -1,4 +1,4 @@
-{% extends "master.html.twig" %}
+{% extends "parent/master.html.twig" %}
 
 {% block title %}Children information:{% endblock %}
 
@@ -13,7 +13,7 @@
             $("#showEidtUser").click(function(){
                 $("#childrenInfoViewEditPane").show();
             });
-            $("#cancel").click(function(){
+            $("#childrenInfoCancel").click(function(){
                 $("#childrenInfoViewEditPane").hide();
             });
             $("#childrenInfoUpdate").click(function(){
@@ -85,11 +85,11 @@
 
 <div id="childrenInfoMainPane">
     <div id="childrenInfoListPane">
-        <p><a href="/parent/parent_board">Go back to parent account page</a>. </p>
-        <table id="childrenInfoListTable">
+        <p><a href="/parent/parent_board">Go back</a></p>
+        <table id="childrenInfoListTable" class="table table-hover table-info">
             <tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Date Of Birth</th><th>Emergency Contact</th><th>Emergency Phone</th></tr>
             {% for a in list %}
-            <tr onclick="selectChild('{{a.id}}')">
+            <tr onclick="selectChild('{{a.id}}')" data-toggle="modal" data-target="#exampleModalCenter">
                 <td>{{a.id}}</td>
                 <td>{{a.firstName}}</td>
                 <td>{{a.lastName}}</td>
@@ -102,15 +102,34 @@
         </table>
     </div>
 
-    <div id="childrenInfoViewEditPane" style="display: none;">
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{a.firstName}} {{a.lastName}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="childrenInfoViewEditPane">
         Name: <span id="childrenInfoName">{{a.firstName}} {{a.lastName}}</span><br/>
         Gender: <span id="childrenInfoGender">{{a.gender}}</span><br/>
         Date Of Birth: <span id="childrenInfoDOB">{{a.dateOfBirth}}</span><br/>
         Emergency Contact: <input type="text" name="childrenInfoEmergencyContact"><br/>
         Emergency Phone: <input type="text" name="childrenInfoEmergencyPhone" placeholder="888-888-8888"><br/>
-        <button id="childrenInfoUpdate">Update</button>
+        {# <button id="childrenInfoUpdate">Update</button> #}
+        {# <button id="childrenInfoCancel">Cancel</button> #}
     </div>
-
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="childrenInfoUpdate" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
 {% endblock content %}

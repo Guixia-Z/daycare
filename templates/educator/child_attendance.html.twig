@@ -2,21 +2,21 @@
 
 
 {% block content %}
-<h3>Attendance Form</h3>
-Date: {{today}}<br>
-<form  method = "post" enctype="multipart/form-data">
+<h1 class="edu"><img src="/images/child.jpg" width="70px"/>Attendance Form</h1>
+<h5 class"date">Date: {{today}}<h5><br>
+<form class="form" method = "post" enctype="multipart/form-data">
         <input type="text" hidden name="childId"  value="{{child.id}}"><br/>
-        First Name: <input type="text" name="firstName" value="{{child.firstName}}" readonly><br/>
-        Last Name: <input type="text" name="lastName" value="{{child.lastName}}" readonly><br>
-        Date:<input type="date" name="date"><br>
-        Start Time:<input type="time" name="startTime"><br>
-        Leave Time:<input type="time" name="endTime"><br>
-        Staus: <select name="status"><br>
+        First Name: <input class ="note"type="text" name="firstName" value="{{child.firstName}}" readonly><br/>
+        Last Name: <input class ="note" type="text" name="lastName" value="{{child.lastName}}" readonly><br>
+        Date:<input class ="note" type="date" name="date"><br>
+        Start Time:<input class ="note" type="time" name="startTime"><br>
+        Leave Time:<input class ="note" type="time" name="endTime"><br>
+        Staus: <select class ="note" name="status"><br>
     <option value="present">Present</option>
     <option value="absent">Absent</option>
 </select><br/>
-        Notes: <textarea name="note"></textarea><br>
-        <input type="submit" value="submit">
+        Notes: <textarea  class ="note" name="note"></textarea><br>
+        <input class ="submitList1" type="submit" value="submit">
     </form>
        <br><br>
 {% endblock content %}

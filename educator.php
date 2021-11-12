@@ -54,7 +54,7 @@ $app->get('/educator/childlist', function ($request, $response, $args) {
     $app->get('/educator/attendanceHistory', function ($request, $response, $args) {
         $today = date("Y/m/d");
         $childId = $request->getParam('id');
-        $attendanceList = DB::query("select c.id childId, a.id attendanceId, c.firstName, c.lastName, a.date, (CASE a.startTime WHEN '00:00:00' THEN '' ELSE a.startTime END) AS startTime,( CASE a.endTime WHEN '00:00:00' THEN '' ELSE a.endTime END ) AS endTime, a.note, a.status FROM children c, attendance a where a.childId=c.id and c.id=%d", $childId);
+        $attendanceList = DB::query("select c.id childId, a.id attendanceId, c.firstName, c.lastName, a.date, (CASE a.startTime WHEN '00:00:00' THEN '' ELSE a.startTime END) AS startTime,( CASE a.endTime WHEN '00:00:00' THEN '' ELSE a.endTime END ) AS endTime, a.note, a.status FROM children c, attendance a where a.childId=c.id and c.id=%d order by a.date desc", $childId);
         return $this->view->render($response, '/educator/attendanceHistory.html.twig',
         [ 'today' => $today,'list'=>$attendanceList,'childId'=>$childId]);
 
@@ -87,7 +87,7 @@ $app->get('/educator/childnotes_detail', function ($request, $response, $args) {
 $app->get('/educator/child_attendance_detail', function ($request, $response, $args) {
     $today = date("Y/m/d");
     $educatorId = $_SESSION["user"]["id"];
-    $attendanceList = DB::query("SELECT a.id,a.date, (CASE a.startTime WHEN '00:00:00' THEN '' ELSE a.startTime END) AS startTime,( CASE a.endTime WHEN '00:00:00' THEN '' ELSE a.endTime END ) AS endTime, a.status,a.note,a.childId, b.firstName,b.lastName FROM attendance a,children b WHERE a.childId = b.id and b.educatorId =%d", $educatorId);
+    $attendanceList = DB::query("SELECT a.id,a.date, (CASE a.startTime WHEN '00:00:00' THEN '' ELSE a.startTime END) AS startTime,( CASE a.endTime WHEN '00:00:00' THEN '' ELSE a.endTime END ) AS endTime, a.status,a.note,a.childId, b.firstName,b.lastName FROM attendance a,children b WHERE a.childId = b.id and b.educatorId =%d order by a.date desc", $educatorId);
     return $this->view->render($response, '/educator/child_attendance_detail.html.twig',
     ['list' => $attendanceList, 'today' => $today]);
 

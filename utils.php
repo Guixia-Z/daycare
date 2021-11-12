@@ -13,13 +13,15 @@ $app->post('/educator/addchildnotes', function ($request, $response, $args) use 
     $noteCreatedTs = $today;
     $errorList = [];
     
+    if (strlen($note) < 2 || strlen($note) > 1000) {
+        $errorList[] = "Note must be 2-200 characters long";
+    }
     if (!is_numeric($weight)||$weight  < 0 ) {
-        $errorList[] = "weight can not be negative number";
+        $errorList[] = "height  can not be empty ,must be a number positive";
     }
     if (!is_numeric($height)||$height  < 0 ) {
-        $errorList[] = "height can not be negative number";
+        $errorList[] = "height can not be empty,must be a number positive";
     }
-
     // image validation
     $uploadedImage = $request->getUploadedFiles()['image'];
     if($_FILES['image']['name'] != "") {
@@ -60,7 +62,9 @@ $app->post('/educator/note_edit', function ($request, $response, $args) use ($lo
     $today = date("Y/m/d");
     $noteCreatedTs = $today;
     $errorList = [];
-    
+    if (strlen($note) < 2 || strlen($note) > 1000) {
+        $errorList[] = "Note must be 2-200 characters long";
+    }
     if (!is_numeric($weight)||$weight  < 0 ) {
         $errorList[] = "height must be a number positive";
     }

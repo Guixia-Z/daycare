@@ -1,19 +1,21 @@
-{% extends "master.html.twig" %}
+{% extends "parent/master.html.twig" %}
 
 {% block title %}Parent Board{% endblock %}
 
 {% block content %}
 
-<h2>Parent Account</h2>
+<h2>Parent Account</h2><br/><br/>
 
-<p><a href="/logout">Logout</a></p>
+<div class="parentBoard">
 
-<p><a href="/parent/viewchildnote">View child's note</a></p>
+<a class="button parentBtn1" href="/addchild_info/{{id}}"><p>Add a child</p></a>
 
-<p><a href="/parent/modifychildinfo">Modify child's information</a></p>
+<a class="button parentBtn1" href="/parent/viewwaitinglist"><p>View child on the waiting list</p></a>
 
-<p><a href="/addchild_info/{{id}}">Add a child</a></p>
+<a class="button parentBtn1" href="/parent/viewchildnote"><p>View child's note</p></a>
 
-<p><a href="/parent/viewwaitinglist">View child on the waiting list</a></p>
+<a class="button parentBtn1" href="/parent/modifychildinfo"><p>Modify child's information</p></a>
+
+</div>
 
 {% endblock %}
