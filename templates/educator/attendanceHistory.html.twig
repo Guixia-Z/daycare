@@ -1,0 +1,25 @@
+{% extends "master.html.twig" %}
+
+{% block content %}
+
+<a href="/educator/childlist">Go Back</a><br>
+<a href="/educator/child_attendance?childId={{childId}}">Add Attenance</a> </p>
+Date: {{today}}<br>
+
+<table>
+    <tr><th>First Name </th><th>Last Name</th><th>Date</th>
+    <th>Start Time</th><th>End Time</th><th>Statu<th>Notes</th><th>Record Time</th><th>Romove</th></tr>
+    {% for a in list %}
+        <tr><td> {{a.firstName}}</td> 
+        <td>{{a.lastName}}</td>
+        <td>{{a.date}}</td>
+        <td>{{a.startTime}} </td>
+        <td>{{a.endTime}} </td>  
+        <td>{{a.status}} </td>
+        <td>{{a.note}} </td>   
+        <td><a href="/educator/attendance_remove?attendanceId={{a.attendanceId}}&childId={{a.childId}}">Remove</a><br>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}

@@ -1,26 +1,22 @@
 {% extends "master.html.twig" %}
-{% block title %}Child attenance list{% endblock %}
+
+
 {% block content %}
 <h3>Attendance Form</h3>
 Date: {{today}}<br>
-           <form  method = "post" >
-                  Child Id   <input type="text" hidden name="id"  value="{{child.id}}"><br/>
-                  First Name: <input type="text" name="firstName" value="{{child.firstName}}"><br/>
-                  Last Name: <input type="text" name="lastName" value="{{child.lastName}}"><br>
-                 Start Time:<input type="time" name="startTS" min="00:00:00" max="23:59:59"><br>
-                 Leave Time:<input type="time" name="endTS" min="00:00:00" max="23:59:59"><br>
-                Staus: <select name="status"><br>
-               <option value="present">Present</option>
-                <option value="absent">Absent</option>
-            </select><br/>
-                 Notes: <textarea name="note"></textarea><br>
-                 <input type="submit" value="submit">
-                </form>
-            
+<form  method = "post" enctype="multipart/form-data">
+        <input type="text" hidden name="childId"  value="{{child.id}}"><br/>
+        First Name: <input type="text" name="firstName" value="{{child.firstName}}" readonly><br/>
+        Last Name: <input type="text" name="lastName" value="{{child.lastName}}" readonly><br>
+        Date:<input type="date" name="date"><br>
+        Start Time:<input type="time" name="startTime"><br>
+        Leave Time:<input type="time" name="endTime"><br>
+        Staus: <select name="status"><br>
+    <option value="present">Present</option>
+    <option value="absent">Absent</option>
+</select><br/>
+        Notes: <textarea name="note"></textarea><br>
+        <input type="submit" value="submit">
+    </form>
        <br><br>
-         
-   
-
-    
-</table>
 {% endblock content %}
