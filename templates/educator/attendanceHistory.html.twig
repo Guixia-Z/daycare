@@ -2,22 +2,22 @@
 
 {% block content %}
 
-<a href="/educator/childlist">Go Back</a><br>
-<a href="/educator/child_attendance?childId={{childId}}">Add Attenance</a> </p>
+<a class="herf" href="/educator/childlist"><img src="/images/back.jpg" width="40px"/></a><br>
+<a  class="herf3" href="/educator/child_attendance?childId={{childId}}"><img src="/images/note.jpg" width="60px"/></a> </p>
 Date: {{today}}<br>
 
-<table>
-    <tr><th>First Name </th><th>Last Name</th><th>Date</th>
-    <th>Start Time</th><th>End Time</th><th>Statu<th>Notes</th><th>Record Time</th><th>Romove</th></tr>
+<table >
+    <tr class="talbeNote"><th class="th1" >First Name </th><th class="th1">Last Name</th><th class="th">Date</th>
+    <th class="th1">Start Time</th><th class="th1">End Time</th><th class="th">Statu<th class="th">Notes</th><th class="th">Romove</th></tr>
     {% for a in list %}
-        <tr><td> {{a.firstName}}</td> 
-        <td>{{a.lastName}}</td>
-        <td>{{a.date}}</td>
-        <td>{{a.startTime}} </td>
-        <td>{{a.endTime}} </td>  
-        <td>{{a.status}} </td>
-        <td>{{a.note}} </td>   
-        <td><a href="/educator/attendance_remove?attendanceId={{a.attendanceId}}&childId={{a.childId}}">Remove</a><br>
+        <tr ><td class="th"> {{a.firstName}}</td> 
+        <td class="th">{{a.lastName}}</td>
+        <td class="th1"> {{a.date}}</td>
+        <td class="th" >{{a.startTime}} </td>
+        <td class="th"> {{a.endTime}} </td>  
+        <td class="th" >{{a.status}} </td>
+        <td class="th1">{{a.note}} </td>   
+        <td class="th"><a href="/educator/attendance_remove?attendanceId={{a.attendanceId}}&childId={{a.childId}}"> <img src="/images/remove-friend.png" width="30px"/></a><br>
         </tr>
     {% endfor %}
 </table>

@@ -2,26 +2,26 @@
 
 {% block content %}
 
-
-<a href="/educator/addchildnotes?childId={{childId}}">Add Notes</a> </p>
+<a class="herf" href="/educator/childlist"> <img src="/images/back.jpg" width="40px"/></a>
+<a class="herf3" href="/educator/addchildnotes?childId={{childId}}"><img src="/images/note.jpg" width="60px"/></a> </p>
 Date: {{today}}<br>
 
-<table>
-    <tr> <th>First Name </th> <th>Last Name</th> <th>Photo</th> <th>Height(cm)</th> <th>Weight(kg)</th> <th>Skill</th> <th>Notes</th> <th>Record Time</th> </tr>
+<table class="talbeNote">
+    <tr> <th class="th1">First Name </th> <th  class="th1">Last Name</th> <th  class="th">Photo</th> <th  class="th">Height(cm)</th><th class="th">Weight(kg)</th> <th  class="th">Skill</th> <th  class="th">Notes</th> <th  class="th1">Record Date</th> <th class="th">Edit</th><th class="th">Remove</th></tr>
     {% for a in list %}
         <tr>
-            <td>{{a.firstName}}</td>
-            <td>{{a.lastName}}</td>
-           <td><img src="../{{a.photoFilePath}}" width="150" alt=""></td>
-            <td>{{a.height}}</td>
-            <td>{{a.weight}}</td>
-            <td>{{a.skills}}</td>
-            <td>{{a.note}}</td>
-             <td>{{a.noteCreatedTS}}</td>
-            <td><a href="/educator/note_edit?noteId={{a.id}}"> Edit</a></td>
-            <td><a href="/educator/note_remove?noteId={{a.id}}">Remove</a></td>
+            <td  class="th">{{a.firstName}}</td>
+            <td  class="th">{{a.lastName}}</td>
+           <td class="th1" ><img src="../{{a.photoFilePath}}" width="150" hight="100" alt="notepic"></td>
+            <td  class="th">{{a.height}}</td>
+            <td class="th" >{{a.weight}}</td>
+            <td  class="th">{{a.skills}}</td>
+            <td  class="th1">{{a.note}}</td>
+             <td  class="th">{{a.noteCreatedTS}}</td>
+            <td ><a class="herf1" href="/educator/note_edit?noteId={{a.id}}"><img src="/images/pencil.png" width="30px"/> </a></td>
+           <td> <a class="herf2" href="/educator/note_remove?noteId={{a.id}}&childId={{childId}}"><img src="/images/remove-friend.png" width="30px"/></a></td>
         </tr>
     {% endfor %}
 </table>
-<a href="/educator/childlist">Go Back</a><br>
+
 {% endblock content %}

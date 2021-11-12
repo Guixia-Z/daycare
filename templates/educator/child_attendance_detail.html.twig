@@ -1,24 +1,26 @@
 {% extends "master.html.twig" %}
 {% block content %}
 
+<h1 class="edu"><img src="/images/child.jpg" width="70px"/>Children Attendance List</h1>
+<a class="herf" href="/educator/childlist"><img src="/images/back.jpg" width="40px"/></a><br><br>
 Date: {{today}}
-<table>
-<tr> <th>First name</th> <th>Last Name</th> <th>Date</th> <th>Start Time</th> <th>End Time</th> <th>Staus</th> <th>Note</th> </tr><br>
+<table >
+<tr> <th class= "th1">First name</th> <th class= "th1">Last Name</th> <th class ="th1">Date</th> <th class= "th1">Start Time</th> <th class = "th1">End Time</th> <th class = "th">Staus</th> <th class ="th">Note</th> </tr>
     {% for a in list %}
-    <tr><td> {{a.firstName}}</td> 
-        <td>{{a.lastName}}</td>
-        <td>{{a.date}}</td>
-        <td>{{a.startTime}} </td>
-        <td>{{a.endTime}} </td>  
-        <td>{{a.status}} </td>
-        <td>{{a.note}} </td>   
-        </tr><br>
+    <tr><td class = "th"> {{a.firstName}}</td> 
+        <td class ="th">{{a.lastName}}</td>
+        <td class ="th">{{a.date}}</td>
+        <td class ="th">{{a.startTime}} </td>
+        <td class ="th">{{a.endTime}} </td>  
+        <td class ="th">{{a.status}} </td>
+        <td class ="th"> {{a.note}} </td>   
+        </tr>
 
    
 
     {% endfor %}
 </table>
 
-<a href="/educator/childlist">Go Back</a><br>
+
 
 {% endblock content %}

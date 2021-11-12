@@ -9,18 +9,18 @@
     {% endfor %}
     </ul>
 {% endif %}
-<h3>Add Child Note:</h3>
-   <form method="post"enctype="multipart/form-data" >
+<h1 class ="edu">Add Child Note</h1>
+   <form class="form" method="post"enctype="multipart/form-data" >
 
    <input type="text"hidden name="childId"  value="{{child.id}}"><br/>
-    First Name: <input type="text" readonly name="firstName" value="{{child.firstName}}"><br/>
-    Last Name: <input type="text" readonly name="lastName" value="{{child.lastName}}"><br/>
-    Image: <input type="file" name="image"><br>
-    Height(cm): <input type="textr" name="height"><br>
-    Weight(kg): <input type="text" name="weight"><br>
-    Skill: <input type="text" name="skills" ><br>
-    Notes: <textarea name="note"></textarea><br>
-    <input type="submit" value="submit">
+    First Name: <input class ="note"type="text" readonly name="firstName" value="{{child.firstName}}"><br/>
+    Last Name: <input class ="note" type="text" readonly name="lastName" value="{{child.lastName}}"><br/>
+    Image: <input class ="note" type="file" name="image"><br>
+    Height(cm): <input class ="note" type="textr" name="height"><br>
+    Weight(kg): <input class ="note" type="text" name="weight"><br>
+    Skill: <input class ="note" type="text" name="skills" ><br>
+    Notes: <textarea class ="note" name="note"></textarea><br>
+    <input class ="submitList1"  type="submit" value="submit">
 </form> 
 {% endblock content %}
  

@@ -10,20 +10,20 @@
     </ul>
 {% endif %}
 
-<h3> Child Notes Edit:</h3>
-
-   <form method="post"enctype="multipart/form-data" >
+<h1 class="edu"> Child Notes Edit<img src="/images/edit1.jpg" width="40px"/></h1>
+<a class="herf" href="/educator/childnotes_detail"><img src="/images/back.jpg" width="40px"/></a>
+   <form class="form" method="post"enctype="multipart/form-data" >
     <input type="text"  hidden name="id"  value="{{note.id}}"><br/>
-    First Name: <input type="text" name="firstName" value="{{note.firstName}}"><br/>
-    Last Name: <input type="text" name="lastName" value="{{note.lastName}}"><br/>
-    Image: <input type="file" name="image"><br>
-    Height(cm): <input type="textr" name="height" value="{{note.height }}"><br>
-    Weight(kg): <input type="text" name="weight" value="{{ note.weight }}"><br>
-    Skill: <input type="text" name="skills" value="{{ note.skills}}"><br>
-    Notes: <textarea name="note">{{ note.note}}</textarea><br>
+    First Name: <input class="note"type="text" name="firstName" value="{{note.firstName}}"><br/>
+    Last Name: <input  class="note" type="text" name="lastName" value="{{note.lastName}}"><br/>
+    Image: <input  class="note" type="file" name="image"><br>
+    Height(cm): <input  class="note" type="textr" name="height" value="{{note.height }}"><br>
+    Weight(kg): <input  class="note" type="text" name="weight" value="{{ note.weight }}"><br>
+    Skill: <input  class="note" type="text" name="skills" value="{{ note.skills}}"><br>
+    Notes: <textarea  class="note" name="note">{{ note.note}}</textarea><br>
    
-    <input type="submit" value="save">
+    <input  class="submitList1"type="submit" value="save">
 </form> 
-<a href="/educator/childnotes_detail">Children Note List</a><br>
+
 {% endblock content %}
  

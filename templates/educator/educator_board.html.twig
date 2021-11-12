@@ -1,11 +1,41 @@
 {% extends "master.html.twig" %}
+{% block title %}Educator Board{% endblock %}
+{% block addHead %}
+ <link rel="stylesheet" href="/css.css"/>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script>
+    $(document).ready(function() {
+        
+        $("#childrenlist1").click(function(){
+            window.location.href="/educator/childlist";
+        });
+        $("#attendance1").click(function(){
+            window.location.href="/educator/child_attendance_detail";
+        });
+        $("#waitinglist1").click(function(){
+            window.location.href="/educator/childnotes_detail";
+        });
+        $("#home1").click(function(){
+            window.location.href="/logout";
+        });
+    });
+ </script>
+{% endblock %}
 
 {% block content %}
 
+<h1 class ="edu">Educator Account</h1>
 
-<p><a href="/logout">Logout</a></p>
-<a href="/educator/childlist">Children list (Group class)</a><br>
-<a href="/educator/child_attendance_detail">Children Attenance Detail</a><br>
-<a href="/educator/childnotes_detail">Children Notes Detail</a><br>
+<div id="adminBoard">
 
-{% endblock content %}
+<button class="button1" id="childrenlist1">Children List(Group)</button>
+
+<button class="button1" id="attendance1">Children Attenance List</button>
+
+<button class="button1" id="waitinglist1">Children Notes List</button>
+
+</div>
+
+<button class="button2" id="home1">Logout</button>
+
+{% endblock %}
