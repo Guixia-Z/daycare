@@ -272,3 +272,29 @@ To do until next Scrum:
 - front end,css
 3. Need assistance / figure things out
 - additional library.
+
+2021/11/12 Hong Lin
+1. Done since last scrum:
+-  all the backend functions in educator.
+- finished some form design of front end
+2. To do until next Scrum:
+- front end,css
+3. Need assistance / figure things out
+- continue fix some function and discussion about front end.
+
+2021/11/12 Yuan Yuan
+1. Done since last scrum:
+-  add style to parent board
+2. To do until next Scrum:
+- add style to other templates
+3. Need assistance / figure things out
+- fixed the css problems.
+
+2021/11/12 Guixia
+1. Done since last scrum:
+- front end login, index, register, admin
+- js chart
+2. To do until next Scrum:
+- add style to other templates
+3. Need assistance / figure things out
+- fixed the css problems.
