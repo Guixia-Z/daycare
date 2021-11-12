@@ -1,9 +1,9 @@
-{% extends "master.html.twig" %}
+{% extends "educator/master.html.twig" %}
 
 {% block content %}
 
 Date: {{today}}<br>
-<talbe class="talbeNote" >
+<talbe class="admintable" >
 <tr><th>First name</th> <th>Last Name</th> <th>Check in</th><th>Check out</th> <th>Absent</th></tr>
     {% for a in list %}
     <tr>

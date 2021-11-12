@@ -1,4 +1,4 @@
-{% extends "master.html.twig" %}
+{% extends "educator/master.html.twig" %}
 
 {% block content %}
 <h1 class="edu"><img src="/images/child.jpg" width="70px"/>Child Note List</h1>
@@ -6,7 +6,7 @@
 <a class="herf3" href="/educator/addchildnotes?childId={{childId}}"><img src="/images/note.jpg" width="60px"/></a> </p>
 Date: {{today}}<br>
 
-<table class="talbeNote">
+<table class="admintable">
     <tr> <th class="th1">First Name </th> <th  class="th1">Last Name</th> <th  class="th">Photo</th> <th  class="th">Height(cm)</th><th class="th">Weight(kg)</th> <th  class="th">Skill</th> <th  class="th">Notes</th> <th  class="th1">Record Date</th> <th class="th">Edit</th><th class="th">Remove</th></tr>
     {% for a in list %}
         <tr>
