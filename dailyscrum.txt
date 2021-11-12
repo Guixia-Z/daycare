@@ -289,3 +289,12 @@ To do until next Scrum:
 - add style to other templates
 3. Need assistance / figure things out
 - fixed the css problems.
+
+2021/11/12 Guixia
+1. Done since last scrum:
+- front end login, index, register, admin
+- js chart
+2. To do until next Scrum:
+- add style to other templates
+3. Need assistance / figure things out
+- fixed the css problems.
