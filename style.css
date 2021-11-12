@@ -253,3 +253,36 @@ body .headerColor a:link{
 #viewEditPane{
   font-family: "Noto Sans", sans-serif;
 }
+
+/* parent board */
+.parentBoard {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 50px 100px;
+}
+.parentBoard a:link{
+  text-decoration: none;
+}
+.parentBtn1{
+  background-color: white; 
+  color: #007cc3; 
+  border: 2px solid #007cc3;
+  box-shadow: 2px 2px 5px #007cc3;
+  border-radius: 8px;
+}
+
+.parentBtn1:hover {
+  background-color: #007cc3;
+  color: white;
+}
+
+.tableInfoColor{
+  background-color: #8ebcd6;
+}
+.addChildInfoPage{
+  min-height: 500px;
+}
+.viewWaitingListPage{
+  min-height: 500px;
+}
+/* parent board end*/
