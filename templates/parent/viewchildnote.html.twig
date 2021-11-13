@@ -5,7 +5,7 @@
 <h3>Child Record:</h3>
 
 <table class="table table-hover table-info">
-    <tr><th>First Name</th><th>Last Name</th><th>Gender</th><th>Group</th><th>record date</th><th>record by</th><th>weight (kg)</th><th>height (cm)</th><th>skills</th><th>note</th><th>photoFilePath</th></tr>
+    <tr><th>First Name</th><th>Last Name</th><th>Gender</th><th>Group</th><th>Record date</th><th>Record by</th><th>Weight (kg)</th><th>Height (cm)</th><th>Skills</th><th>Note</th><th>Photo</th></tr>
     {% for a in list %}
     <tr>
         <td>{{a.firstName}}</td>
@@ -18,11 +18,11 @@
         <td>{{a.height}}</td>
         <td>{{a.skills}}</td>
         <td>{{a.note}}</td>
-        <td><img src="{{a.photoFilePath}}" width="150"></td>
+        <td><img src="../{{a.photoFilePath}}" width="150"></td>
     </tr>
     {% endfor %}
 </table>
 
-<p><a href="/parent/parent_board">Go back</a></p>
+<a class="herf" href="/parent/parent_board"><img src="/images/back.jpg" width="40px"/></a><br>
 
 {% endblock content %}

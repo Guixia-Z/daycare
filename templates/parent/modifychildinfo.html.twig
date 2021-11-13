@@ -85,7 +85,6 @@
 
 <div id="childrenInfoMainPane">
     <div id="childrenInfoListPane">
-        <p><a href="/parent/parent_board">Go back</a></p>
         <table id="childrenInfoListTable" class="table table-hover table-info">
             <tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Date Of Birth</th><th>Emergency Contact</th><th>Emergency Phone</th></tr>
             {% for a in list %}
@@ -101,6 +100,7 @@
             {% endfor %}
         </table>
     </div>
+    <a class="herf" href="/parent/parent_board"><img src="/images/back.jpg" width="40px"/></a><br>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
