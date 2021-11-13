@@ -1,11 +1,13 @@
 {% extends "educator/master.html.twig" %}
 
 {% block content %}
+<a class="herf" href="/educator/educator_board"><img src="/images/back.jpg" width="40px"/></a> 
+<h1 class ="edu" onmouseover="style.color='yellow'
+"onmouseout="style.color='green'" ><img src="/images/child.jpg" width="70px"/>Group Child List</h1>
 
-<h1 class ="edu"><img src="/images/child.jpg" width="70px"/>Group Child List</h1>
-<a class="herf" href="/educator/educator_board"><img src="/images/back.jpg" width="40px"/></a> </p>
-    <table class="admintable">
-        <tr><th class="th">First Name</th><th class="th" >Last Name</th><th class="th" >Gender</th><th class="th">Date Of Birth</th><th class="th">EmerContactName</th><th class="th">EmergencyPhone</th><th class="th"> Note</th><th class="th">Addtendance</th></tr>
+
+    <table class="admintable1">
+        <tr><th class="th1">First Name</th><th class="th1" >Last Name</th><th class="th1" >Gender</th><th class="th1">Date Of Birth</th><th class="th1">EmerContactName</th><th class="th1">EmergencyPhone</th><th class="th1"> Note</th><th class="th1">Addtendance</th></tr>
         {% for a in list %}
         <tr>
         <td class="th">{{a.firstName}}</td>
@@ -29,5 +31,6 @@
         </tr>
         {% endfor %}
     </table>
-
+   
+<div class = "pic"><img src="/images/kids.png" width="800" height="250" /></div>
 {% endblock content %}

@@ -2,6 +2,8 @@
 
 
 {% block content %}
+
+<a class="herf" href="/educator/childlist"><img src="/images/back.jpg" width="40px"/></a>
 {% if errorList %}
     <ul>
     {% for error in errorList %}
@@ -9,7 +11,9 @@
     {% endfor %}
     </ul>
 {% endif %}
-<h1 class ="edu"><img src="/images/child.jpg" width="70px"/>Add Child Note</h1>
+
+<h1 class ="edu" onmouseover="style.color='yellow'
+"onmouseout="style.color='green'"><img src="/images/child.jpg" width="70px"/>Add Child Note</h1>
    <form class="form" method="post"enctype="multipart/form-data" >
 
    <input type="text"hidden name="childId"  value="{{child.id}}"><br/>
@@ -22,5 +26,6 @@
     Notes: <textarea class ="note" name="note"></textarea><br>
     <input class ="submitNote"  type="submit" value="submit">
 </form> 
+<div class = "pic"><img src="/images/kids.png" width="800" height="250" /></div>
 {% endblock content %}
  

@@ -1,11 +1,12 @@
 {% extends "educator/master.html.twig" %}
 {% block content %}
+<a class="herf" href="/educator/childlist"><img src="/images/back.jpg" width="40px"/></a><br>
+<h1 class="edu"onmouseover="style.color='yellow'
+"onmouseout="style.color='green'" ><img src="/images/child.jpg" width="70px"/>Children Attendance List</h1>
 
-<h1 class="edu"><img src="/images/child.jpg" width="70px"/>Children Attendance List</h1>
-<a class="herf" href="/educator/childlist"><img src="/images/back.jpg" width="40px"/></a><br><br>
-Date: {{today}}
-<table >
-<tr> <th class= "th1">First name</th> <th class= "th1">Last Name</th> <th class ="th1">Date</th> <th class= "th1">Start Time</th> <th class = "th1">End Time</th> <th class = "th">Staus</th> <th class ="th">Note</th> </tr>
+<h5  class"date">Date: {{today}}<h5><br>
+<table class="admintable1">
+<tr>  <th class="th1"> First name</th> <th class= "th1">Last Name</th> <th class ="th1">Date</th> <th class= "th1">Start Time</th> <th class = "th1">End Time</th> <th class = "th1">Staus</th> <th class ="th1">Note</th> </tr>
     {% for a in list %}
     <tr><td class = "th"> {{a.firstName}}</td> 
         <td class ="th">{{a.lastName}}</td>
@@ -21,6 +22,6 @@ Date: {{today}}
     {% endfor %}
 </table>
 
-
+<div class = "pic"><img src="/images/kids.png" width="800" height="250" /></div>
 
 {% endblock content %}
