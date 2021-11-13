@@ -2,22 +2,129 @@
 
 {% block title %}Waitinglist{% endblock %}
 
+{% block addHead %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var currId = 0;
+        $(document).ajaxError(function() {
+            alert("AJAX error");
+        });
+        $(document).ready(function() {
+            $("#showEidtUser").click(function(){
+                $("#waitingListEditPane").show();
+            });
+            $("#waitingListCancel").click(function(){
+                $("#waitingListEditPane").hide();
+            });
+            $("#waitingListUpdate").click(function(){
+                var firstNameVal = $("input[name=waitinglistFirstName]").val();
+                var lastNameVal = $("input[name=waitinglistLastName]").val();
+                var genderVal = $("input[name=waitinglistGender]").val();
+                var dateOfBirthVal = $("input[name=waitinglistDOB]").val();
+                var hasSiblingVal = $("input[name=waitinglistHasSibling]").val();
+                var childObj = {firstName: firstNameVal, lastName: lastNameVal, gender:genderVal, dateOfBirth:dateOfBirthVal, hasSibling:hasSiblingVal};
+                var josnString = JSON.stringify(childObj);
+
+                $.ajax({
+                    url: '/parent/viewwaitinglist/' + currId,
+                    type: 'PATCH',
+                    data: josnString,
+                    dataType: 'json'
+                }).done(function (newId) {
+                    alert("Record with Id=" + currId + "updated");
+                    currId = 0;
+                    $("#waitingListEditPane").hide();
+                    refreshWaitingList();
+                });
+            });
+
+            $("#waitingListDelete").click(function(){
+                if(currId == 0) return;
+                if(!confirm("Are you sure you want to delete this child?")) return;
+                $.ajax({
+                    url: '/parent/viewwaitinglist/' + currId,
+                    type: 'DELETE',
+                    dataType: 'json'
+                }).done(function (result) {
+                    alert("deleted successfully" + result);
+                    refreshWaitingList();
+                    currId = 0;
+                    $("#waitingListEditPane").hide();
+                });
+            });
+        });
+        
+        function selectWaitinglist(id){
+            $.ajax({
+                url: '/parent/viewwaitinglist/' + id,
+                type: 'GET',
+                dataType: 'json'
+            }).done(function (waitinglist) {
+                currId = waitinglist.id;
+                $("input[name=waitinglistFirstName]").val(waitinglist.firstName);
+                $("input[name=waitinglistLastName]").val(waitinglist.lastName);
+                $("input[name=waitinglistGender]").val(waitinglist.gender);
+                $("input[name=waitinglistDOB]").val(waitinglist.dateOfBirth);
+                $("input[name=waitinglistHasSibling]").val(waitinglist.hasSibling);
+                $("#waitingListEditPane").show();
+            });
+        };
+
+        function refreshWaitingList() {
+            location.reload();
+        }
+
+    </script>
+ {% endblock %}
+
 {% block content %}
 <div class="viewWaitingListPage">
+    <div id="viewWaitingListPane">
+        <table id="viewWaigingListTable" class="table table-hover table-info">
+            <tr><th>First Name</th><th>Last Name</th><th>Gender</th><th>Date of Birth</th><th>Has Siblings</th></tr>
+            {% for a in list %}
+                <tr onclick="selectWaitinglist('{{a.id}}')" data-toggle="modal" data-target="#exampleModalCenter">
+                    <td>{{a.firstName}}</td>
+                    <td>{{a.lastName}}</td>
+                    <td>{{a.gender}}</td>
+                    <td>{{a.dateOfBirth}}</td>
+                    <td>{{a.hasSibling}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+    <a class="herf" href="/parent/parent_board"><img src="/images/back.jpg" width="40px"/></a><br>
 
-<table class="table table-hover table-info">
-    <tr><th>First Name</th><th>Last Name</th><th>Gender</th><th>Date of Birth</th><th>Has Siblings</th></tr>
-    {% for a in list %}
-        <tr>
-            <td>{{a.firstName}}</td>
-            <td>{{a.lastName}}</td>
-            <td>{{a.gender}}</td>
-            <td>{{a.dateOfBirth}}</td>
-            <td>{{a.hasSibling}}</td>
-        </tr>
-    {% endfor %}
-</table>
-
-<a class="herf" href="/parent/parent_board"><img src="/images/back.jpg" width="40px"/></a><br>
+<!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">{{a.firstName}} {{a.lastName}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="waitingListEditPane">
+                FirstName: <input type="text" name="waitinglistFirstName"><br/>
+                LastName: <input type="text" name="waitinglistLastName"><br/>
+                Gender: <input type="text" name="waitinglistGender"><br/>
+                Date of Birth: <input type="text" name="waitinglistDOB"><br/>
+                HasSibling: <select name="waitinglistHasSibling">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                        </select><br/>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="waitingListUpdate" class="btn btn-primary">Update</button>
+                <button type="button" id="waitingListDelete" class="btn btn-primary">Delete</button>
+            </div>
+            </div>
+        </div>
+    </div>
 </div>
-{% endblock %}
+{% endblock content%}
