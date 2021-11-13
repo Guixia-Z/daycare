@@ -109,6 +109,7 @@ $app->post('/admin/childrenlist/delete/{id:[0-9]+}', function ($request, $respon
     if(!$child){
         throw new \Slim\Exception\NotFoundException($request, $response);
     }
+    DB::delete("childnotes", "childId=%i", $args["id"]);
     DB::delete("children", "id=%i", $args["id"]);
 
     $pageNo = $args["pageNo"] ?? 1;
@@ -151,7 +152,6 @@ $app->group('/admin', function (App $app) use ($log) {
         $json = json_encode($user, JSON_PRETTY_PRINT);
         $response->getBody()->write($json);
         return $response;
-        //return $this->view->render($response, '/admin/userlist.html.twig');
     });
 
     $app->map(['PUT','PATCH'], '/userlist/{id:[0-9]+}', function (Request $request, Response $response, array $args) use ($log) {
@@ -182,9 +182,17 @@ $app->group('/admin', function (App $app) use ($log) {
 
     $app->delete('/userlist/{id:[0-9]+}', function (Request $request, Response $response, array $args) use ($log) {
         $id = $args['id'];
-        // FIXME: make sure body is empty
-        DB::delete('users', "id=%i", $args['id']);
-        $log->debug("Record users deleted id=" . $id);
+        $hasChild = DB::queryFirstField("SELECT COUNT(*) FROM `children` WHERE parentId=%i",$id);
+
+        //echo $hasChild;
+        if($hasChild){
+            $response = $response->withStatus(400);
+            $response->getBody()->write(json_encode("400 - The user has ". $hasChild ."child in daycare!"));
+            return $response;
+        }else{
+            DB::delete('users', "id=%i", $args['id']);
+            $log->debug("Record users deleted id=" . $id);
+        }
         // code is always 200
         // return true if record actually deleted, false if it did not exist in the first place
         $count = DB::affectedRows();
@@ -262,21 +270,8 @@ $app->add(function(Request $request, Response $response, callable $next){
 
 $app->get('/admin/groupchart', function ($request, $response, $args) {
     $numberlist = DB::queryFirstColumn("SELECT COUNT(*) FROM `children` GROUP BY groupId ORDER By groupId");
-    // $array = objarray_to_array($numberlist);
     //print_r($numberlist);
     return $this->view->render($response, '/admin/groupchart.html.twig',['list' => $numberlist]);
 });
-
-function objarray_to_array($obj) {
-    $ret = array();
-    foreach ($obj as $key => $value) {
-    if (gettype($value) == "array" || gettype($value) == "object"){
-            $ret[$key] =  objarray_to_array($value);
-    }else{
-        $ret[$key] = $value;
-    }
-    }
-    return $ret;
-}  
 
 // $app->get('/admin/user/list', function .....);

@@ -160,7 +160,7 @@ body .headerColor a:link{
   }
   
   th {
-    height: 70px;
+    height: 70px; 
     font-family: 'Mochiy Pop P One', sans-serif;
   }
   
@@ -441,7 +441,7 @@ body .headerColor a:link{
 }
 
 .tableInfoColor{
-  background-color: #8ebcd6;
+  background-color: red;
 }
 .addChildInfoPage{
   min-height: 500px;

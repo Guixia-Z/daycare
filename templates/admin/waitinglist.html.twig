@@ -2,6 +2,23 @@
 
 {% block title %}Waitinglist{% endblock %}
 
+{% block addHead %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#wadd").click(function(ev){
+            if(!confirm("Are you sure you want to add this child into daycare?")) {
+                ev.preventDefault();
+                return;
+            }else{
+                $form.submit();
+            }
+        });
+    });
+
+</script>
+ {% endblock %}
+
 {% block content %}
 
 <table class="admintable">
@@ -14,7 +31,7 @@
             <td>{{a.gender}}</td>
             <td>{{a.dateOfBirth}}</td>
             <td>{{a.hasSibling}}</td>
-            <td><form method="post" action="/admin/waitinglist/add/{{a.id}}">
+            <td><form id="wadd" method="post" action="/admin/waitinglist/add/{{a.id}}">
                     <input type="submit" value="ADD">
                 </form>
                 <form method="post" action="/admin/waitinglist/delete/{{a.id}}">
