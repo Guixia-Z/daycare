@@ -261,10 +261,10 @@ $app->add(function(Request $request, Response $response, callable $next){
 });
 
 $app->get('/admin/groupchart', function ($request, $response, $args) {
-    $numberlist = DB::query("SELECT COUNT(*) FROM `children` GROUP BY groupId");
-    $array = objarray_to_array($numberlist);
+    $numberlist = DB::queryFirstColumn("SELECT COUNT(*) FROM `children` GROUP BY groupId ORDER By groupId");
+    // $array = objarray_to_array($numberlist);
     //print_r($numberlist);
-    return $this->view->render($response, '/admin/groupchart.html.twig',['list' => $array]);
+    return $this->view->render($response, '/admin/groupchart.html.twig',['list' => $numberlist]);
 });
 
 function objarray_to_array($obj) {
