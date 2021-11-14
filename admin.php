@@ -109,6 +109,7 @@ $app->post('/admin/childrenlist/delete/{id:[0-9]+}', function ($request, $respon
     if(!$child){
         throw new \Slim\Exception\NotFoundException($request, $response);
     }
+    DB::delete("attendance", "childId=%i", $args["id"]);
     DB::delete("childnotes", "childId=%i", $args["id"]);
     DB::delete("children", "id=%i", $args["id"]);
 
