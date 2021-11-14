@@ -13,7 +13,7 @@ $app->get('/admin[/]', function ($request, $response, $args) {
 });
 
 $app->get('/admin/waitinglist', function ($request, $response, $args) {
-    $waitingList = DB::query("SELECT * FROM waitinglist");
+    $waitingList = DB::query("SELECT w.id,w.firstName cfname,w.lastName clname,w.dateOfBirth,w.gender,w.hasSibling,u.firstName pfname,u.lastName plname,u.phoneNumber,u.email FROM waitinglist w, users u WHERE w.parentId=u.id");
     return $this->view->render($response, '/admin/waitinglist.html.twig', ['list' => $waitingList]);
 });
 
