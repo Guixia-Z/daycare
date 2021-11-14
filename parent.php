@@ -220,23 +220,18 @@ function validateWaitlist($waitinglist, $forPatch = false) {
             }
         }
     }
-    // - task 1-100 characters long
-    if (isset($waitinglist['email'])) {
-        $email = $waitinglist['email'];
-        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            return "Email must look like an email";
+
+    if (isset($waitinglist['firstName'])) {
+        $firstName = $waitinglist['firstName'];
+        if (preg_match('/^[A-Za-z]+$/', $waitinglist['firstName']) !== 1) {
+            return "Please check your fisrt name";
         }
     }
-    // - dueDate a valid date from 1900 to 2099 years
-    if (isset($waitinglist['phoneNumber'])) {
-        if (preg_match('/^([1-9]{3})(-)([0-9]{3})(-)([0-9]{4})$/', $waitinglist['phoneNumber']) !== 1) {
-            return "phone need to be 888-888-8888";
-        }
-    }
-    // - status must be pending or done
-    if (isset($waitinglist['address'])) {
-        if(strlen($waitinglist['address']) < 2){
-            return "Please check your address.";
+    
+    if (isset($waitinglist['lastName'])) {
+        $lastName = $waitinglist['lastName'];
+        if (preg_match('/^[A-Za-z]+$/', $waitinglist['lastName']) !== 1) {
+            return "Please check your last name";
         }
     }
     // if we passed all tests return TRUE
