@@ -1,6 +1,6 @@
 {% extends "admin/master.html.twig" %}
 
-{% block title %}Health Chart{% endblock %}
+{% block title %}Growth Curve{% endblock %}
 
 {% block addHead %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -19,7 +19,7 @@
 <script>
 
 const data = {
-  labels: [{% for val in list %}{{"\'"}}{{val.noteCreatedTS| date('Y-m-d')}}{{"\'"}}{% if not loop.last %},{% endif %}{% endfor %}],
+  labels: [{% for val in list %}{{"\'"}}{{val.noteCreatedTS | date('Y-m-d')}}{{"\'"}}{% if not loop.last %},{% endif %}{% endfor %}],
   datasets: [
        {
             label: "weight(kg)",
@@ -47,5 +47,5 @@ const config = {
   );
 </script>
 
-<p> <a href="/admin/"><img src="/images/back.jpg" width="40px"/></a> </p>
+<p> <a href="/admin/childrenlist"><img src="/images/back.jpg" width="40px"/></a> </p>
 {% endblock %}
