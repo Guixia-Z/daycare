@@ -26,7 +26,7 @@
 <h3>Class Name: {{g.gname}}</h3>
 <h3>Educator: {{g.tfname}} {{g.tlname}}</h3>
 <table class="admintable">
-    <tr><th>Child Name</th><th>gender</th><th>dateOfBirth</th><th>firstSchoolDay</th><th>Parent Name</th><th>Phone Number</th><th>Action</th></tr>
+    <tr><th>Child Name</th><th>gender</th><th>dateOfBirth</th><th>firstSchoolDay</th><th>Parent Name</th><th>Phone Number</th><th>Action</th><th>Growth Curve</th></tr>
     {% for a in list %}
     {% if a.groupName == g.gname %}
         <tr>
@@ -45,6 +45,9 @@
                 <form method="post" action="/admin/childrenlist/delete/{{a.id}}">
                     <input id="subbutton" type="submit" value="Remove"/>
                 </form>
+            </td>
+            <td>
+                <a href="/admin/growthchart/{{a.id}}"><img src="/images/trend.png" width="30px"/></a>
             </td>
         </tr>
         {% endif %}

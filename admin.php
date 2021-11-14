@@ -274,4 +274,10 @@ $app->get('/admin/groupchart', function ($request, $response, $args) {
     return $this->view->render($response, '/admin/groupchart.html.twig',['list' => $numberlist]);
 });
 
+$app->get('/admin/growthchart/{id:[0-9]+}', function ($request, $response, $args) {
+    $result = DB::query("SELECT cn.`weight`,cn.height,cn.noteCreatedTS,c.firstName,c.lastName FROM childnotes cn,children c WHERE cn.childId = c.id AND childId=%i ORDER BY noteCreatedTS",$args["id"]);
+    print_r($result);
+    return $this->view->render($response, '/admin/growthchart.html.twig',['list' => $result]);
+});
+
 // $app->get('/admin/user/list', function .....);

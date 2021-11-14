@@ -1,0 +1,51 @@
+{% extends "admin/master.html.twig" %}
+
+{% block title %}Health Chart{% endblock %}
+
+{% block addHead %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<h2>Growth Curve</h2>
+
+<h5>Child Name: {{list[0].firstName}} {{list[0].lastName}}</h5>
+
+<div id="chart">
+    <canvas id="myChart"></canvas>
+</div>
+
+<script>
+
+const data = {
+  labels: [{% for val in list %}{{"\'"}}{{val.noteCreatedTS| date('Y-m-d')}}{{"\'"}}{% if not loop.last %},{% endif %}{% endfor %}],
+  datasets: [
+       {
+            label: "weight(kg)",
+            backgroundColor: "rgba(30, 144, 255, 0.5)",
+            borderColor: "rgba(30, 144, 255, 0.5)",
+            data: [{% for val in list %}{{val.weight}}{% if not loop.last %},{% endif %}{% endfor %}]
+        },
+        {
+            label: "height(cm)",
+            backgroundColor: "rgba(255,62,150, 0.5)",
+            borderColor: "rgba(255,62,150, 0.5)",
+            data: [ {% for val in list %}{{val.height}}{% if not loop.last %},{% endif %}{% endfor %} ] // [3,3,2,1],   
+    }]
+};
+
+const config = {
+  type: 'line',
+  data: data,
+  options: {}
+};
+
+ const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>
+
+<p> <a href="/admin/"><img src="/images/back.jpg" width="40px"/></a> </p>
+{% endblock %}

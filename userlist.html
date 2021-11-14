@@ -68,7 +68,7 @@
 
         function refreshUserList() {
             $.ajax({
-                url: '/admin/userlist',
+                url: '/admin/userlistJson',
                 type: 'GET',
                 dataType: 'json'
             }).done(function (userList) {
@@ -164,7 +164,7 @@
         </div>
     </div>
     <div>
-        <a href="/admin/">go back</a>
+        <a href="/admin/"><img src="/images/back.jpg" width="40px"/></a>
     </div>
     <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted">
