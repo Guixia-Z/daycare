@@ -81,7 +81,7 @@ $app->post('/admin/attendance', function ($request, $response, $args) use ($log)
     $groupid = $request->getParam('group');
     $date = $request->getParam('date');
     $date = date("Y-m-d", strtotime($date));
-    $attendanceList = DB::query("SELECT c.firstName,c.lastName,a.date,a.startTime,a.endTime,a.`status`,a.note "
+    $attendanceList = DB::query("SELECT g.groupName,c.firstName,c.lastName,a.date,a.startTime,a.endTime,a.`status`,a.note "
                 . "FROM children c,attendance a,groups g WHERE g.id=c.groupId AND a.childId=c.id AND a.date=%s AND g.id=%i",$date, $groupid);
   
     return $this->view->render($response, '/admin/attendancelist.html.twig', ['list' => $attendanceList]);
