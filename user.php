@@ -83,7 +83,7 @@ $app->post('/userinfo', function ($request, $response, $args) use ($log) {
         DB::insert('users', $valuesList);
         $id = DB::queryFirstField("SELECT id FROM users WHERE email=%s",$_SESSION["email"]);
         
-        return $this->view->render($response, 'parentaccount.html.twig',["id" => $id]);
+        return $this->view->render($response, '/parent/parent_board.html.twig',["id" => $id]);
         
         unset($_SESSION["email"],$_SESSION["pass"]);
     }
