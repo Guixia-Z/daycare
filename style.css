@@ -142,6 +142,19 @@ body .headerColor a:link{
     background-color: #f1707d;
     color: white;
   }
+
+  #userlist1{
+    background-color: white; 
+    color: #cb8e85; 
+    border: 2px solid #cb8e85;
+    box-shadow: 2px 2px 5px #cb8e85;
+    border-radius: 8px;
+  }
+  
+  #userlist1:hover {
+    background-color: #cb8e85;
+    color: white;
+  }
   
   #home {
     background-color: white; 
@@ -494,6 +507,5 @@ body .headerColor a:link{
   margin-top: -30px;
   margin-left: 20px;
 }
-
 
 
