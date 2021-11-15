@@ -320,25 +320,22 @@ body .headerColor a:link{
   height: auto;
   width: 100%; 
  background-image: url("images/Pic.PNG");
- opacity: 1.0;
-
 }
+
 #educatorBoard {
   display: grid;
-  grid-gap: 50px 100px;
-
-  
+  grid-gap: 50px 100px; 
 }
+
 .edu{
   text-align: center;
   color: blueviolet;
  margin-top: 10px;
  font-family: "Lemon", cursive;
   font-size: 40px;
-  
 }
+
 .button1 {
- 
   width: 600px;
   background-color: #4CAF50; /* Green */
   border: none;
@@ -353,7 +350,6 @@ body .headerColor a:link{
   transition-duration: 0.4s;
   cursor: pointer;
   font-family: "Lemon", cursive;
-  
 }
 
 #childrenlist1{
@@ -432,14 +428,15 @@ body .headerColor a:link{
   font-family: "Lemon", cursive;
   cursor: pointer;
 }
+
 .submitList{
   border: none;
   background-color: lightgreen;
   border-radius: 5px;
   font-size:14px;
-  font-family: "Lemon", cursive;
   padding-right:5px ;
 }
+
 .submitNote{
   margin-left: 200px;
   border: none;
@@ -449,9 +446,9 @@ body .headerColor a:link{
   font-family: Georgia, 'Times New Roman', Times, serif;
   width: 100px;
   margin-bottom: 20px;
-  font-family: "Lemon", cursive;
- 
+  font-family: "Lemon", cursive; 
 }
+
 .admintable1{
   border-collapse: collapse;
   width: 100%;
@@ -460,6 +457,7 @@ body .headerColor a:link{
   margin-bottom: 30px;
   font-family: "Lemon", cursive;
 }
+
 .form{
   padding-left:50px ;
   padding-right:50px;
@@ -475,17 +473,20 @@ body .headerColor a:link{
   border-radius: 10px;
   font-family: "Lemon", cursive; 
 }
+
 .note{
   margin: 10px;
   color: #007cc3;
   border-radius: 5px;
   border: #b8f1ed;
 }
+
 .th{
   width: 80px;
   padding: 10px;
   
 }
+
 .th1{
   width: 100px;
 }
@@ -494,18 +495,30 @@ body .headerColor a:link{
   margin-left: 1120px;
   
 }
+
 .herf3{
   float: right;
 }
+
 .pic{
   margin-left: 200px;
   margin-top: -20px;
 }
+
 #clock {
   font-family: 'Orbitron', sans-serif;
   font-size: 16px;
   margin-top: -30px;
   margin-left: 20px;
+}
+
+.erro{
+  margin: 30px auto;
+  background-color: lightgoldenrodyellow;
+  color: red;
+  text-decoration: none;
+  list-style-type: none;
+  width: 500px;
 }
 
 
