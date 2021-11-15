@@ -8,8 +8,9 @@
 <h5  class"date">Date: {{today}}</h5><br>
 <br><div id="clock"></div>
 
+<div class= "erro">
 {% if errorList %}
-  <ul class="errorlist">
+
     {% for error in errorList %}
         <li>{{ error }}</li>
     {% endfor %}

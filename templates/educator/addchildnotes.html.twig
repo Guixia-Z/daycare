@@ -4,15 +4,15 @@
 {% block content %}
 
 <a class="herf" href="/educator/childlist"><img src="/images/back.jpg" width="40px"/></a>
-
+<div class="erro">
 {% if errorList %}
-   <ul class="errorlist">
+  <ul>
     {% for error in errorList %}
         <li>{{ error }}</li>
     {% endfor %}
     </ul>
-{% endif %}
-</div>
+{% endif %}</div>
+
 <h1 class ="edu" onmouseover="style.color='yellow'
 "onmouseout="style.color='green'"><img src="/images/child.jpg" width="70px"/> Child Note Form</h1>
    <form class="form" method="post"enctype="multipart/form-data" >
@@ -29,4 +29,15 @@
 </form> 
 <div class = "pic"><img src="/images/kids.png" width="800" height="250" /></div>
 {% endblock content %}
+ 
+
+
+
+
+
+
+
+
+
+
  

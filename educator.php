@@ -156,10 +156,12 @@ $app->post('/educator/child_attendance', function ($request, $response, $args) u
             $endTS='00:00:00'; 
         }
         if($status == "absent"){
-            $valuesList = ["date" =>$date,"startTime" => "", "endTime" => "", "status" => "absent", "note" => $note, "childId"=>intval($childId)];
+            $valuesList = ["date" =>$date,"startTime" => "", "endTime" => "", "status" => "absent", "note" => $note,
+             "childId"=>intval($childId)];
             DB::insert('attendance', $valuesList);
         }else{
-            $valuesList = ["date" =>$date,"startTime" => $startTS, "endTime" => $endTS, "status" => $status, "note" => $note, "childId"=>intval($childId)];
+            $valuesList = ["date" =>$date,"startTime" => $startTS, "endTime" => $endTS, "status" => $status, "note" => $note,
+             "childId"=>intval($childId)];
             DB::insert('attendance', $valuesList);
         }
         return $this->view->render($response, '/educator/child_check_success.html.twig',['childId'=>$childId]);
