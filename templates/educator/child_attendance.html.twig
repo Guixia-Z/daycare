@@ -6,9 +6,15 @@
 <h1 class="edu" onmouseover="style.color='yellow'
 "onmouseout="style.color='green'"><img src="/images/child.jpg" width="70px"/>Attendance Form</h1>
 <h5  class"date">Date: {{today}}</h5><br>
-
-<div id="clock"><br></div>
-
+<br><div id="clock"></div>
+<div class= "erro">
+{% if errorList %}
+    <ul>
+    {% for error in errorList %}
+        <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}</div>
 <form class="form" method = "post" enctype="multipart/form-data">
         <input type="text" hidden name="childId"  value="{{child.id}}"><br/>
         First Name: <input class ="note"type="text" name="firstName" value="{{child.firstName}}" readonly><br/>

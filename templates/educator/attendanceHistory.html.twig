@@ -10,11 +10,10 @@
 <h5  class"date">Date: {{today}}<h5><br>
 
 <table class="admintable1">
-    <tr class="admintable1"><th class="th1" >First Name </th><th class="th1">Last Name</th><th class="th">Date</th>
-    <th class="th1">Start Time</th><th class="th1">End Time</th><th class="th">Statu<th class="th">Notes</th><th class="th">Romove</th></tr>
+   <tr> <th>First Name:{{child.firstName}}</th>
+    <th>Last Name:{{child.lastName}}</td></tr>
+  <tr><th class="th">Date</th><th class="th1">Start Time</th><th class="th1">End Time</th><th class="th">Statu<th class="th">Notes</th><th class="th">Romove</th></tr>
     {% for a in list %}
-        <tr ><td class="th"> {{a.firstName}}</td> 
-        <td class="th">{{a.lastName}}</td>
         <td class="th1"> {{a.date}}</td>
         <td class="th" >{{a.startTime}} </td>
         <td class="th"> {{a.endTime}} </td>  

@@ -3,10 +3,12 @@
 {% block content %}
 <a class="herf" href="/educator/educator_board"><img src="/images/back.jpg" width="40px"/></a> 
 <h1 class ="edu" onmouseover="style.color='yellow'
-"onmouseout="style.color='green'" ><img src="/images/child.jpg" width="70px"/>Group Child List</h1>
+"onmouseout="style.color='green'" ><img src="/images/child.jpg" width="70px"/>Group Children List</h1>
 
+<div class = "name"><h5 class="group">Group: {{educator.groupAll}}</h5>
+    <h5 class="group">Educator: {{educator.fullName}}</h5><div>
 
-    <table class="admintable1">
+ <table class="admintable1">
         <tr><th class="th1">First Name</th><th class="th1" >Last Name</th><th class="th1" >Gender</th><th class="th1">Date Of Birth</th><th class="th1">EmerContactName</th><th class="th1">EmergencyPhone</th><th class="th1"> Note</th><th class="th1">Addtendance</th></tr>
         {% for a in list %}
         <tr>

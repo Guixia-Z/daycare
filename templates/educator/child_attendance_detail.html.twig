@@ -4,22 +4,45 @@
 <h1 class="edu"onmouseover="style.color='yellow'
 "onmouseout="style.color='green'" ><img src="/images/child.jpg" width="70px"/>Children Attendance List</h1>
 
-<h5  class"date">Date: {{today}}<h5><br>
-<table class="admintable1">
-<tr>  <th class="th1"> First name</th> <th class= "th1">Last Name</th> <th class ="th1">Date</th> <th class= "th1">Start Time</th> <th class = "th1">End Time</th> <th class = "th1">Staus</th> <th class ="th1">Note</th> </tr>
-    {% for a in list %}
-    <tr><td class = "th"> {{a.firstName}}</td> 
-        <td class ="th">{{a.lastName}}</td>
-        <td class ="th">{{a.date}}</td>
-        <td class ="th">{{a.startTime}} </td>
-        <td class ="th">{{a.endTime}} </td>  
-        <td class ="th">{{a.status}} </td>
-        <td class ="th"> {{a.note}} </td>   
-        </tr>
 
-   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ajaxError(function() {
+        alert("AJAX error");
+    });
+    $(document).ready(function() {
+            $.ajax({
+                url: '/educator/child_attendance_detail_json',
+                type: 'GET',
+                //data: josnString,
+                dataType: 'json'
+            }).done(function (attendanceList) {
+                alert("Records were fetched");
+                refreshUserList(attendanceList);
+        });
+    });
 
-    {% endfor %}
+    function refreshUserList(attendanceList) {
+
+        var tbody = '<tr>  <th class="th1"> First name</th> <th class= "th1">Last Name</th> <th class ="th1">Date</th> <th class= "th1">Start Time</th> <th class = "th1">End Time</th> <th class = "th1">Staus</th> <th class ="th1">Note</th> </tr>';
+        for (var i = 0; i < attendanceList.length; i++) {
+            var attendance = attendanceList[i];
+            tbody += '<td class = "th">' + attendance.firstName + '</td>';
+            tbody += '<td class = "th">' + attendance.lastName + '</td>';
+            tbody += '<td class = "th">' + attendance.date + '</td>';
+            tbody += '<td class = "th">' + attendance.startTime + '</td>';
+            tbody += '<td class = "th">' + attendance.endTime + '</td>';
+            tbody += '<td class = "th">' + attendance.status + '</td>';
+            tbody += '<td class = "th">' + attendance.note + '</td>';
+            tbody += '</tr>';
+        }
+        $("#attendanceList").html(tbody);
+            
+    }
+</script>
+
+<table class="admintable1" id="attendanceList">
+
 </table>
 
 <div class = "pic"><img src="/images/kids.png" width="800" height="250" /></div>

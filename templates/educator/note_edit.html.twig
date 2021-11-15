@@ -2,6 +2,11 @@
 
 
 {% block content %}
+
+<a class="herf" href="/educator/childnotes_detail"><img src="/images/back.jpg" width="40px"/></a>
+<h1 class="edu" onmouseover="style.color='yellow'
+"onmouseout="style.color='green'"> Child Notes Edit<img src="/images/edit1.jpg" width="40px"/></h1>
+<div class="erro">
 {% if errorList %}
     <ul>
     {% for error in errorList %}
@@ -9,10 +14,7 @@
     {% endfor %}
     </ul>
 {% endif %}
-<a class="herf" href="/educator/childnotes_detail"><img src="/images/back.jpg" width="40px"/></a>
-<h1 class="edu" onmouseover="style.color='yellow'
-"onmouseout="style.color='green'"> Child Notes Edit<img src="/images/edit1.jpg" width="40px"/></h1>
-
+</div>
    <form class="form" method="post"enctype="multipart/form-data" >
     <input type="text"  hidden name="id"  value="{{note.id}}"><br/>
     First Name: <input class="note"type="text" name="firstName" value="{{note.firstName}}"><br/>

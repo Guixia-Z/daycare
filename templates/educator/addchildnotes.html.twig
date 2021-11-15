@@ -4,6 +4,7 @@
 {% block content %}
 
 <a class="herf" href="/educator/childlist"><img src="/images/back.jpg" width="40px"/></a>
+<div class= "erro">
 {% if errorList %}
     <ul>
     {% for error in errorList %}
@@ -11,9 +12,9 @@
     {% endfor %}
     </ul>
 {% endif %}
-
+</div>
 <h1 class ="edu" onmouseover="style.color='yellow'
-"onmouseout="style.color='green'"><img src="/images/child.jpg" width="70px"/>Add Child Note</h1>
+"onmouseout="style.color='green'"><img src="/images/child.jpg" width="70px"/> Child Note Form</h1>
    <form class="form" method="post"enctype="multipart/form-data" >
 
    <input type="text"hidden name="childId"  value="{{child.id}}"><br/>
