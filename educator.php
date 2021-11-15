@@ -42,6 +42,10 @@ $app->get('/educator/childlist', function ($request, $response, $args) {
         $List = DB::query("SELECT * FROM childnotes");
         $educatorId = $_SESSION["user"]["id"];
         $noteList = DB::query("SELECT a.id,noteCreatedTS, a.weight, a.height, a.skills, a.note, a.photoFilePath, a.educatorId, a.childId, b.firstName,b.lastName FROM childnotes a,children b WHERE a.childId= b.id and a.educatorId =%d and a.childId=%d order by a.id desc" , $educatorId, $childId);
+        foreach ($noteList as &$note) {
+            $fullBodyNoTags = strip_tags($note['note']);
+            $note['note'] = $fullBodyNoTags;
+        }
         return $this->view->render($response, '/educator/noteHistory.html.twig',
         ['list' => $noteList,'today' => $today, 'childId'=>$childId]);
         });
@@ -53,9 +57,6 @@ $app->get('/educator/childlist', function ($request, $response, $args) {
         $child = DB::queryFirstRow("SELECT a.firstName,  a.lastName FROM children a WHERE a.id=%d order by a.id desc" , $childId);
         $noteList = DB::query("SELECT a.id,  noteCreatedTS, a.weight, a.height, a.skills, a.note, a.photoFilePath, a.educatorId, a.childId, b.firstName,b.lastName FROM childnotes a,children b WHERE a.childId= b.id and a.educatorId =%d and a.childId=%d order by a.id desc" , $educatorId, $childId);
         foreach ($noteList as &$note) {
-           // $datetime = strtotime($note['noteCreatedTS']);
-           // $postedDate = date('M d, Y', $datetime);
-           // $note['noteCreatedTS'] = $postedDate;
             $fullBodyNoTags = strip_tags($note['note']);
             $note['note'] = $fullBodyNoTags;
         }
@@ -83,6 +84,10 @@ $app->get('/educator/childlist', function ($request, $response, $args) {
         $childId = $request->getParam('childId');
         DB::delete("attendance", "id=%i", $attendanceId);
         $attendanceList = DB::query("select c.id childId, a.id attendanceId, c.firstName, c.lastName, a.date, a.startTime,a.endTime, a.note, a.status FROM children c, attendance a where a.childId=c.id and c.id=%d", $childId);
+        foreach ($attendanceList as &$note) {
+            $fullBodyNoTags = strip_tags($note['note']);
+            $note['note'] = $fullBodyNoTags;
+        }
         return $this->view->render($response, '/educator/attendanceHistory.html.twig',
         [ 'today' => $today,'list'=>$attendanceList, 'childId'=>$childId]);
     });
@@ -91,9 +96,6 @@ $app->get('/educator/childnotes_detail', function ($request, $response, $args) {
     $educatorId = $_SESSION["user"]["id"];
     $noteList = DB::query("SELECT a.id, a.noteCreatedTS, a.weight, a.height, a.skills, a.note, a.photoFilePath, a.educatorId, a.childId, b.firstName,b.lastName FROM childnotes a,children b WHERE a.childId= b.id and a.educatorId =%d order by a.id desc ", $educatorId);
      foreach ($noteList as &$note) {
-       // $datetime = strtotime($note['noteCreatedTS']);
-       //$postedDate = date('M d, Y', $datetime);
-       // $note['noteCreatedTS'] = $postedDate;
         $fullBodyNoTags = strip_tags($note['note']);
         $note['note'] = $fullBodyNoTags;
     }
