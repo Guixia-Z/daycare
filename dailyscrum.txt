@@ -298,3 +298,21 @@ To do until next Scrum:
 - add style to other templates
 3. Need assistance / figure things out
 - fixed the css problems.
+
+-2021/11/15 Guixia
+1. Done since last scrum:
+-  finished everything
+2. To do until next Scrum:
+- prepare presentation
+
+2021/11/12 Hong Lin
+1. Done since last scrum:
+-  finished everything
+2. To do until next Scrum:
+- prepare presentation
+
+2021/11/12 Yuan Yuan
+1. Done since last scrum:
+-  finished everything
+2. To do until next Scrum:
+- prepare presentation
