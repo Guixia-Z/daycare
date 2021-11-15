@@ -27,16 +27,16 @@ const data = {
   datasets: [{
     label: 'Group Chart',
     backgroundColor: [
-        'red',
-        'green',
-        'blue',
-        'yellow'
+        'rgba(41, 128, 185,0.8)',
+        'rgba(46, 204, 113,0.8)',
+        'rgba(214, 137, 16,0.8)',
+        'rgba(192, 57, 43,0.8)'
         ],
     borderColor: [
-        'red',
-        'green',
-        'blue',
-        'yellow'
+        'rgba(41, 128, 185,0.8)',
+        'rgba(46, 204, 113,0.8)',
+        'rgba(214, 137, 16,0.8)',
+        'rgba(192, 57, 43,0.8)'
         ],
     data: [ {% for val in list %}{{val}}{% if not loop.last %},{% endif %}{% endfor %} ] // [3,3,2,1],   
   }]
