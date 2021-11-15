@@ -4,9 +4,9 @@
 {% block content %}
 
 <a class="herf" href="/educator/childlist"><img src="/images/back.jpg" width="40px"/></a>
-<div class= "errorlist">
+
 {% if errorList %}
-    <ul>
+   <ul class="errorlist">
     {% for error in errorList %}
         <li>{{ error }}</li>
     {% endfor %}
