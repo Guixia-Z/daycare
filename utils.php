@@ -83,8 +83,7 @@ $app->post('/educator/note_edit', function ($request, $response, $args) use ($lo
     $skills = ($request->getParam('skills'));
     $note = $request->getParam('note');
     $childId=$request->getParam('childId');
-    $today = date("Y/m/d");
-    $noteCreatedTs = $today;
+    $noteCreatedTs =$request->getParam('noteCreatedTS');
     $errorList = [];
     if (strlen($note) < 2 || strlen($note) > 1000) {
         $errorList[] = "Note must be 2-200 characters long";
