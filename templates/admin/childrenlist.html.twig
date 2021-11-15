@@ -6,7 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        $("#subbutton").click(function(ev){
+        $(".subbutton").click(function(ev){
             if(!confirm("Are you sure you want to delete this child?")) {
                 ev.preventDefault();
                 return;
@@ -43,7 +43,7 @@
             <td>{{a.phone}}</td>
             <td>
                 <form method="post" action="/admin/childrenlist/delete/{{a.id}}">
-                    <input id="subbutton" type="submit" value="Remove"/>
+                    <input class="subbutton" type="submit" value="Remove"/>
                 </form>
             </td>
             <td>

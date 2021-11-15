@@ -6,8 +6,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        $("#wadd").click(function(ev){
+        $(".wadd").click(function(ev){
             if(!confirm("Are you sure you want to add this child into daycare?")) {
+                ev.preventDefault();
+                return;
+            }else{
+                $form.submit();
+            }
+        });
+        $(".wdelete").click(function(ev){
+            if(!confirm("Are you sure you want to delete this child?")) {
                 ev.preventDefault();
                 return;
             }else{
@@ -33,10 +41,10 @@
             <td>{{a.pfname}} {{a.plname}}</td>
             <td>{{a.phoneNumber}}</td>
             <td>{{a.email}}</td>
-            <td><form id="wadd" method="post" action="/admin/waitinglist/add/{{a.id}}">
+            <td><form class="wadd" method="post" action="/admin/waitinglist/add/{{a.id}}">
                     <input type="submit" value="ADD">
                 </form>
-                <form method="post" action="/admin/waitinglist/delete/{{a.id}}">
+                <form class="wdelete" method="post" action="/admin/waitinglist/delete/{{a.id}}">
                     <input type="submit" value="Remove">
                 </form>
             </td>
