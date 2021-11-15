@@ -122,7 +122,7 @@ $app->post('/addchild_info/{id:[0-9]+}', function ($request, $response, $args) u
         $errorList []= "Date of birth need to like 2019-08-31,Thank you.";
     }*/
     if ($errorList) { // STATE 2: errors
-        $valuesList = ["fname" => $fname, "lname" => $lname, "dob" => $dob];
+        $valuesList = ["fname" => $fname, "lname" => $lname, "dob" => ""];
         return $this->view->render($response, 'addchild_info.html.twig',
             ['v' => $valuesList, 'errorList' => $errorList]);
     } else {
