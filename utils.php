@@ -83,6 +83,7 @@ $app->post('/educator/note_edit', function ($request, $response, $args) use ($lo
     $weight = $request->getParam('weight');
     $skills = ($request->getParam('skills'));
     $note = $request->getParam('note');
+    $childId=$request->getParam('childId');
     $today = date("Y/m/d");
     $noteCreatedTs = $today;
     $errorList = [];
@@ -119,7 +120,7 @@ $app->post('/educator/note_edit', function ($request, $response, $args) use ($lo
         $valuesList['photoFilePath'] = $destImageFilePath;
     }
     DB::update('childnotes', $valuesList, 'id=%i', intval($id));
-    return $this->view->render($response, '/educator/editsave_success.html.twig');
+    return $this->view->render($response, '/educator/editsave_success.html.twig',['childId'=>$childId]);
 });
 
 function debug_to_console($data) {

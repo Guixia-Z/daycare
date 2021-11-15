@@ -68,7 +68,7 @@ $app->get('/educator/childlist', function ($request, $response, $args) {
         $childId = $request->getParam('id');
         $child = DB::queryFirstRow("SELECT a.firstName,  a.lastName FROM children a WHERE a.id=%d order by a.id desc" , $childId);
         $attendanceList = DB::query("select c.id childId, a.id attendanceId, c.firstName, c.lastName, a.date, (CASE a.startTime WHEN '00:00:00' THEN '' ELSE a.startTime END) AS startTime,( CASE a.endTime WHEN '00:00:00' THEN '' ELSE a.endTime END ) AS endTime, a.note, a.status FROM children c, attendance a where a.childId=c.id and c.id=%d order by a.date desc", $childId);
-        foreach ($attendanceList as &$note) {
+       foreach ($attendanceList as &$note) {
             $fullBodyNoTags = strip_tags($note['note']);
             $note['note'] = $fullBodyNoTags;
         }
@@ -90,7 +90,7 @@ $app->get('/educator/childlist', function ($request, $response, $args) {
 $app->get('/educator/childnotes_detail', function ($request, $response, $args) {
     $educatorId = $_SESSION["user"]["id"];
     $noteList = DB::query("SELECT a.id, CONCAT(date(a.noteCreatedTS), (case time(a.noteCreatedTS) when '00:00:00' then '' else time(a.noteCreatedTS) end )) noteCreatedTS, a.weight, a.height, a.skills, a.note, a.photoFilePath, a.educatorId, a.childId, b.firstName,b.lastName FROM childnotes a,children b WHERE a.childId= b.id and a.educatorId =%d order by a.id desc ", $educatorId);
-   
+    
      foreach ($noteList as &$note) {
         $datetime = strtotime($note['noteCreatedTS']);
         $postedDate = date('M d, Y', $datetime);
@@ -112,11 +112,9 @@ $app->get('/educator/childnotes_detail', function ($request, $response, $args) {
 $app->get('/educator/child_attendance_detail', function ($request, $response, $args) {
    
     $educatorId = $_SESSION["user"]["id"];
-    
     //$attendanceList = DB::query("SELECT a.id,a.date, (CASE a.startTime WHEN '00:00:00' THEN '' ELSE a.startTime END) AS startTime,( CASE a.endTime WHEN '00:00:00' THEN '' ELSE a.endTime END ) AS endTime, a.status,a.note,a.childId, b.firstName,b.lastName FROM attendance a,children b WHERE a.childId = b.id and b.educatorId =%d order by a.date desc", $educatorId);
     return $this->view->render($response, '/educator/child_attendance_detail.html.twig');
     //['list' => $attendanceList]);
-
 });
 
 $app->get('/educator/child_attendance_detail_json', function (Request $request, Response $response, array $args) {
@@ -168,7 +166,6 @@ $app->post('/educator/child_attendance', function ($request, $response, $args) u
         return $this->view->render($response, '/educator/child_check_success.html.twig',['childId'=>$childId]);
     }
 });
-
 
 $app->post('/educator/noteHistory/delete/{id:[0-9]+}', function ($request, $response, $args) {
     $child = DB::queryFirstRow("SELECT * FROM childnotes WHERE id=%i", $args["id"]);
