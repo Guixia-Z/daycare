@@ -23,7 +23,7 @@ $app->post('/admin/waitinglist/delete/{id:[0-9]+}', function ($request, $respons
         throw new \Slim\Exception\NotFoundException($request, $response);
     }
     DB::delete("waitinglist", "id=%i", $args["id"]);
-    $waitingList = DB::query("SELECT * FROM waitinglist");
+    $waitingList = DB::query("SELECT w.id,w.firstName cfname,w.lastName clname,w.dateOfBirth,w.gender,w.hasSibling,u.firstName pfname,u.lastName plname,u.phoneNumber,u.email FROM waitinglist w, users u WHERE w.parentId=u.id");
     return $this->view->render($response, '/admin/waitinglist.html.twig', ['list' => $waitingList]);
 });
 
@@ -49,7 +49,7 @@ $app->post('/admin/waitinglist/add/{id:[0-9]+}', function ($request, $response, 
     DB::insert("children", ["firstName" => $child["firstName"], "lastName" => $child["lastName"], 
             "gender" => $child["gender"], "dateOfBirth" => $child["dateOfBirth"], "firstSchoolDay" => date("Y-m-d"),"parentId" => $child["parentId"], "educatorId" => $teacherid, "groupId" => $groupid]);
     DB::delete("waitinglist", "id=%i", $args["id"]);
-    $waitingList = DB::query("SELECT * FROM waitinglist");
+    $waitingList = DB::query("SELECT w.id,w.firstName cfname,w.lastName clname,w.dateOfBirth,w.gender,w.hasSibling,u.firstName pfname,u.lastName plname,u.phoneNumber,u.email FROM waitinglist w, users u WHERE w.parentId=u.id");
     return $this->view->render($response, '/admin/waitinglist.html.twig',['list' => $waitingList]);
 });
 
