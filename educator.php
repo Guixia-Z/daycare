@@ -138,7 +138,7 @@ $app->post('/educator/child_attendance', function ($request, $response, $args) u
     $today = date("Y-m-d");
     $errorList = [];
     
-    if ($date=='1969-12-31') {
+    if ($date=='2019-08-31') {
         $errorList[] = "You must choose a date";
     }
     if ($startTS=='07:00:00pm'&&$endTS=='07:00:00pm'&&$status == "present") {
