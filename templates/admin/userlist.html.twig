@@ -50,6 +50,20 @@
                     $("#viewEditPane").hide();
                 });
             });
+
+            $("#delete").click(function(){
+                if(currId == 0) return;
+                $.ajax({
+                    url: '/admin/userlist/' + currId,
+                    type: 'DELETE',
+                    dataType: 'json'
+                }).fail(function (result) {
+                    alert("cannot delete the user who has children in daycare");
+                    refreshUserList();
+                    currId = 0;
+                    $("#viewEditPane").hide();
+                });
+            });
         });
         
         function selectUser(id){
