@@ -9,8 +9,7 @@ $app->post('/educator/addchildnotes', function ($request, $response, $args) use 
     $weight =$request->getParam('weight');
     $skills = $request->getParam('skills');
     $note = $request->getParam('note');
-    $today = date("Y/m/d");
-    $noteCreatedTs = $today;
+    $noteCreatedTs =$request->getParam('noteCreatedTS');
     $errorList = [];
     
     if (strlen($note) < 2 || strlen($note) > 1000) {
