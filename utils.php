@@ -105,7 +105,7 @@ $app->post('/educator/note_edit', function ($request, $response, $args) use ($lo
     }
     if ($errorList) { 
         $noteId = $request->getParam('id');
-        $note = DB::queryFirstRow("select a.*,b.firstName,b.lastName,b.id childId  from childnotes a, children b where a.childId=b.id and a.id=%d", $noteId);
+        $note = DB::queryFirstRow("select a.*,b.firstName,b.lastName,b.id childId  from childnotes a, children b where a.childId=b.id and a.id=%i", $noteId);
         return $this->view->render($response, '/educator/note_edit.html.twig',
          ['errorList' => $errorList, 'note' => $note]);
     } 
