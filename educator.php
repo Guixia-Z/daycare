@@ -83,7 +83,7 @@ $app->get('/educator/childlist', function ($request, $response, $args) {
         $attendanceId = $request->getParam('attendanceId');
         $childId = $request->getParam('childId');
         DB::delete("attendance", "id=%i", $attendanceId);
-        $attendanceList = DB::query("select c.id childId, a.id attendanceId, c.firstName, c.lastName, a.date, a.startTime,a.endTime, a.note, a.status FROM children c, attendance a where a.childId=c.id and c.id=%d", $childId);
+        $attendanceList = DB::query("select c.id childId, a.id attendanceId, c.firstName, c.lastName, a.date, (CASE a.startTime WHEN '00:00:00' THEN '' ELSE a.startTime END) AS startTime,( CASE a.endTime WHEN '00:00:00' THEN '' ELSE a.endTime END ) AS endTime, a.note, a.status FROM children c, attendance a where a.childId=c.id and c.id=%i", $childId);
         foreach ($attendanceList as &$note) {
             $fullBodyNoTags = strip_tags($note['note']);
             $note['note'] = $fullBodyNoTags;
